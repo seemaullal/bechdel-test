@@ -5,9 +5,12 @@
 		<script src="angular/angular.js"></script>
 		<link rel='stylesheet' href="bootstrap/dist/css/bootstrap.css">
 		<link rel='stylesheet' href="stylesheets/style.css">
+		<script src="lodash/lodash.min.js"></script>
 		<script src="js/app.js"></script>
+		<script src="js/directives/scriptPasterDirective.js"></script>
+		<script src="js/factories/scriptFactory.js"></script>
 	</head>
-	<body>
+	<body ng-controller="MainController" ng-app="Bechdel">
 		<div class="navbar navbar-default navbar-fixed-top move-me ">
 			<div class="container">
 				<div class="navbar-header">
@@ -20,17 +23,20 @@
 				</div>
 			</div>
 		</div>
+
 		<div id="wrap">
 			<div id="main" class="container clear-top">
 				<div class="row">
 					<div class="span12">
 						<div class='jumbotron'>
 							<h3>Welcome to Bechdelerator!<h3>
+							<something></something>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		
 		<script src="jquery/dist/jquery.min.js"></script>
 		<script src="bootstrap/dist/js/bootstrap.js"></script>
 	</body>
