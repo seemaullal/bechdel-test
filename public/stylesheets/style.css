@@ -1,0 +1,139 @@
+html,body {
+    height:100%;
+}
+
+body {
+  padding-top: 65px; /*for bootstrap navbar top*/
+}
+ 
+#wrap {
+  min-height: 100%;  
+}
+ 
+#main {
+    overflow:auto;
+    padding-bottom:75px; /* this needs to be bigger than footer height*/
+    margin-bottom: 20px;
+}
+ 
+.footer {
+    position: relative;
+    margin-top: -75px; /* negative value of footer height */
+    height: 75px;
+    clear:both;
+    padding-top:20px;
+    background-color: #212121;
+    color: white
+} 
+
+.game-interface {
+	min-height: 400px;
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	/*border: 2px solid black;*/
+}
+
+.game-interface > h1 {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.game-interface > .pic {
+	min-height:100px;
+	width: 100px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #b6b6b6;
+	margin-top: 10%;
+}
+
+.game-interface > .row{
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20%;
+}
+
+.btn.btn-primary {
+	background-color: #4856b6;
+	margin-bottom: 10px;
+}
+
+.navbar-default {
+border-color: #000;
+background-color:#242222;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #FFF;
+}
+    .navbar-default .navbar-nav > li > a:hover {
+        color: #fff;
+    }
+  
+/*.navbar-nav > li > a {
+    margin: 5px 0px 5px 0px;
+}*/
+
+.navbar-default .navbar-toggle {
+    border:2px solid #4856b6;
+    vertical-align: middle;
+}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+    background-color:#4856b6;
+}
+.navbar-default .navbar-toggle .icon-bar {
+background-color: #fff;
+}
+
+.navbar-default .navbar-toggle:hover .icon-bar {
+background-color: #fff;
+}
+
+.navbar-default a.navbar-brand {
+	vertical-align: middle;
+	color: #a7c0ff;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+	color: #9daaff;
+}
+
+
+.navbar-default a.navbar-brand:hover {
+color: #9daaff;
+}
+
+.custom-select {
+  -webkit-appearance: button;
+  -webkit-border-radius: 2px;
+  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  -webkit-padding-end: 20px;
+  -webkit-padding-start: 2px;
+  -moz-user-select: none;
+  -moz-appearance: button;
+  -moz-border-radius: 2px;
+  -moz-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  -moz-padding-end: 20px;
+  -moz-padding-start: 2px;
+  -moz-user-select: none;
+  background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA , #F4F4F4  40%, #E5E5E5 );
+  background-position: 97% center;
+  background-repeat: no-repeat;
+  border: 1px solid #AAA;
+  color: #555;
+  font-size: inherit;
+  overflow: hidden;
+  // padding: 5px 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 75%;
+}
+
+.clicked-photo {
+  border: 8px solid #6078ff ;
+  /*display:block; */
+  /*position:absolute;*/
+  height: 165px;
+  width: 165px;
+}
