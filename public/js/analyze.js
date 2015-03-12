@@ -21,7 +21,7 @@ var analyzer = function(script){
 	console.log(topTenNames);
 	var nodes = [];
 	topTenNames.forEach(function(nameObj, index, arr){
-		nodes.push({"name":nameObj.name, "group":1});
+		nodes.push({"name":nameObj.name, "group":index});
 		arr[index] = nameObj.name;
 
 	})
@@ -59,7 +59,7 @@ function noder(nodes){
 	.attr("class", "link")
 	.style("stroke-width", function(d) { return Math.sqrt(d.value); });
 	var node = svg.selectAll(".node")
-	.data(graph.nodes)
+	.data(nodes)
 	.enter().append("circle")
 	.attr("class", "node")
 	.attr("r", 5)
