@@ -3,6 +3,7 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
 .container {
     width:45%;
 }
@@ -18,4 +19,9 @@ body {
 
 h1 {
 color: white;
+}
+
+.btn.btn-white {
+    background-color: white;
+    color: #197EC1
 }
