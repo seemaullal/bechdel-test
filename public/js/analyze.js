@@ -127,19 +127,20 @@ var linkFinder = function(script, topNames){
 	console.log("names",names);
 	console.log("lines",lines);
 	console.log("conversations",conversations);
-	links = []
+	links = [];
 	conversations.forEach(function(convo){
 		var source = topNames.indexOf(convo.personA);
 		var target = topNames.indexOf(convo.personB);
 		if (source > -1 && target > -1){
-			link = {"source": source, "target":target, "value":2}
-			links.push(link)
+			link = {"source": source, "target":target, "value":2};
+			links.push(link);
 		}
-	})
-	return links
+	});
+	return links;
 	//
 	//
-}
+};
+
 var analyzer = function(script){
 	var nameCatcher = /\s[A-Z]+\s/g;
 	var names = script.match(nameCatcher);
@@ -148,15 +149,15 @@ var analyzer = function(script){
 		word = word.replace(/(\r\n|\n|\r)/gm,"").trim();
 		return word.length > 1 && (commonWords.indexOf(word.toLowerCase())== -1);
 	});
-	names = _.uniq(names)
+	names = _.uniq(names);
 	var counts = _.countBy(names);
-	console.log("counts", counts)
+	console.log("counts", counts);
 	var sorted = _.chain(counts).
 		map(function(cnt,name){
 			return{
 				name:name,
 				count:cnt
-				}
+				};
 			})
 		.sortBy('count').value();
 	console.log(sorted);
@@ -215,13 +216,25 @@ function noder(nodes, links){
 	});
 
 }
+function tomatoesAreFruit(movieName) {
+  $.get('/api/getcast/' + movieName, function (data) {
+    var chars = "";
+    data.forEach(function (character) {
+      if (character) {
+        chars += "<div>" + character + "</div>";
+      }
+    });
+    $("#panelText").html(chars);
+    console.log(data);
+  });
+}
 
 $(document).ready(function(){
-	console.log("is this on?")
+	console.log("is this on?");
     $("#splitAnalysis").click(function(){
-    	analyzer($("#script").val())
+    	analyzer($("#script").val());
     });
     $("#tomatoesAnalysis").click(function(){
-
-    })
+        tomatoesAreFruit($("#movieName").val());
+    });
 });
