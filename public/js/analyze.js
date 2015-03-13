@@ -115,7 +115,7 @@ var linkFinder = function(script, topNames){
 		return word.length > 1;
 	});
 	
-	var lines = script.split(names);
+	var lines = script.split(nameCatcher);
 	var conversations = [];
 	for(var nameIndex = 0; nameIndex < (names.length); nameIndex++){
 		var convo = {};
@@ -163,12 +163,21 @@ var analyzer = function(script){
 	var topNames = sorted.reverse().slice(0,50);
 	console.log(topNames);
 	var nodes = [];
+  var genders = []
 	topNames.forEach(function(nameObj, index, arr){
+  //   setTimeout(function(){ 
+  //     var name = nameObj.name.trim()
+  //     $.get("https://gender-api.com/get?name="+name+"&key=PUTKEYHERE",function(data){
+  //       genders.push(data.gender)
+  //   }); 
+  // }, 1000);
+    
     var groupNum = Math.floor(Math.random()*2)
 		nodes.push({"name":nameObj.name, "group":groupNum});
 		arr[index] = nameObj.name;
 
 	})
+  
 	var links = linkFinder(script, topNames)
 	noder(nodes, links);
 	
