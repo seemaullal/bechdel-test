@@ -148,7 +148,7 @@ var analyzer = function(script){
 		word = word.replace(/(\r\n|\n|\r)/gm,"").trim();
 		return word.length > 1 && (commonWords.indexOf(word.toLowerCase())== -1);
 	});
-	names = _.uniq(names)
+	
 	var counts = _.countBy(names);
 	console.log("counts", counts)
 	var sorted = _.chain(counts).
@@ -164,7 +164,8 @@ var analyzer = function(script){
 	console.log(topNames);
 	var nodes = [];
 	topNames.forEach(function(nameObj, index, arr){
-		nodes.push({"name":nameObj.name, "group":index});
+    var groupNum = Math.floor(Math.random()*2)
+		nodes.push({"name":nameObj.name, "group":groupNum});
 		arr[index] = nameObj.name;
 
 	})
@@ -176,7 +177,10 @@ function noder(nodes, links){
 	console.log("nodes",nodes)
 	var width = 1000,
 	height = 1000;
-	var color = d3.scale.category20();
+	// var color = d3.scale.category20();
+  var color = d3.scale.linear()
+    .domain([0, 1])
+    .range(["pink", "blue"]);
 	var force = d3.layout.force()
 	.charge(-120)
 	.linkDistance(200)
