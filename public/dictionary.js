@@ -1,4 +1,4 @@
-["AA",
+var words= ["AA",
 "AAH",
 "AAHED",
 "AAHING",
