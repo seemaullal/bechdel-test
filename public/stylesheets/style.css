@@ -264,6 +264,16 @@ a.pure-button-primary {
 
 }
 
+.node {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+.link {
+  stroke: #999;
+  stroke-opacity: .6;
+}
+
 /*
  * -- DESKTOP (AND UP) MEDIA QUERIES --
  * On desktops and other large devices, we want to over-ride some
@@ -275,3 +285,4 @@ a.pure-button-primary {
         font-size: 300%;
     }
 }
+

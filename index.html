@@ -1,45 +1,35 @@
-<!doctype html>
-<html lang="en">
-	<head>
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="Bechdel test visualizer. Show what conversations between characters occur using Javascript and D3.js">
 		<title>Bechdelerator</title>
-
+		<script src="jquery/dist/jquery.min.js"></script>
 		<script src="lodash/lodash.min.js"></script>
-		<link rel="stylesheet" href="pure/pure-min.css">
-		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+		
+
 		<link rel="stylesheet" href="stylesheets/style.css">
-		<script src="js/app.js"></script>
-		<script src="js/directives/scriptPasterDirective.js"></script>
-		<script src="js/factories/scriptFactory.js"></script>
+
 	</head>
-	<body>
-		<div class="header">
-			<div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
-				<a class="pure-menu-heading" href="/">Bechdelerator</a>
-				<!-- <ul class="pure-menu-list">
-						<li class="pure-menu-item pure-menu-selected"><a href="#" class="pure-menu-link">Home</a></li>
-						<li class="pure-menu-item"><a href="#" class="pure-menu-link">Tour</a></li>
-						<li class="pure-menu-item"><a href="#" class="pure-menu-link">Sign Up</a></li>
-				</ul> -->
-			</div>
-		</div>
-		<div class="splash-container">
-			<div class="splash">
-				<h1 class="splash-head">Find out if a movie passes the Bechdel test!</h1>
-				<p class="splash-subhead">
-					Enter a movie script to get a visualization of the conversations between its characters and predict whether it will pass the Bechdel test.
-				</p>
-				<p>
-					<a href="/" class="pure-button pure-button-primary">Analyze movie</a>
-				</p>
-			</div>
-		</div>
-		<something></something>
-		<div class="footer l-box is-center">
-			Made by Seema and Sarah while at Fullstack Academy. Yay.
-		</div>
-	</div>
-</body>
-</html>
+<style>
+.node {
+stroke: #fff;
+stroke-width: 1.5px;
+}
+.link {
+stroke: #999;
+stroke-opacity: .6;
+}
+</style>
+<body>
+
+	<textarea type="text" class="form-control" id="script" rows="10"></textarea>
+	<button>Analyze</button>
+	<button id="genderize">Genderize</button>
+
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<script src="js/analyze.js"></script>
+	<script>
+	
+	</script>
