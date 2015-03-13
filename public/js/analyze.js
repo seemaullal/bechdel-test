@@ -114,7 +114,8 @@ var linkFinder = function(script, topNames){
 		word = word.replace(/(\r\n|\n|\r)/gm,"").trim();
 		return word.length > 1;
 	});
-	var lines = script.split(nameCatcher);
+	
+	var lines = script.split(names);
 	var conversations = [];
 	for(var nameIndex = 0; nameIndex < (names.length); nameIndex++){
 		var convo = {};
@@ -147,6 +148,7 @@ var analyzer = function(script){
 		word = word.replace(/(\r\n|\n|\r)/gm,"").trim();
 		return word.length > 1 && (commonWords.indexOf(word.toLowerCase())== -1);
 	});
+	names = _.uniq(names)
 	var counts = _.countBy(names);
 	console.log("counts", counts)
 	var sorted = _.chain(counts).
@@ -170,13 +172,6 @@ var analyzer = function(script){
 	noder(nodes, links);
 	
 }
-$(document).ready(function(){
-	console.log("is this on?")
-    $("#genderize").click(function(){
-    	analyzer($("#script").val())
-    });
-
-});
 function noder(nodes, links){
 	console.log("nodes",nodes)
 	var width = 1000,
@@ -220,3 +215,13 @@ function noder(nodes, links){
 	});
 
 }
+
+$(document).ready(function(){
+	console.log("is this on?")
+    $("#splitAnalysis").click(function(){
+    	analyzer($("#script").val())
+    });
+    $("#tomatoesAnalysis").click(function(){
+
+    })
+});
