@@ -115,7 +115,7 @@ var linkFinder = function(script, topNames){
 		return word.length > 1;
 	});
 	
-	var lines = script.split(names);
+	var lines = script.split(nameCatcher);
 	var conversations = [];
 	for(var nameIndex = 0; nameIndex < (names.length); nameIndex++){
 		var convo = {};
@@ -149,7 +149,9 @@ var analyzer = function(script){
 		word = word.replace(/(\r\n|\n|\r)/gm,"").trim();
 		return word.length > 1 && (commonWords.indexOf(word.toLowerCase())== -1);
 	});
+
 	names = _.uniq(names);
+
 	var counts = _.countBy(names);
 	console.log("counts", counts);
 	var sorted = _.chain(counts).
@@ -164,20 +166,33 @@ var analyzer = function(script){
 	var topNames = sorted.reverse().slice(0,50);
 	console.log(topNames);
 	var nodes = [];
+  var genders = [];
 	topNames.forEach(function(nameObj, index, arr){
-		nodes.push({"name":nameObj.name, "group":index});
+  //   setTimeout(function(){ 
+  //     var name = nameObj.name.trim()
+  //     $.get("https://gender-api.com/get?name="+name+"&key=PUTKEYHERE",function(data){
+  //       genders.push(data.gender)
+  //   }); 
+  // }, 1000);
+    
+    var groupNum = Math.floor(Math.random()*2);
+		nodes.push({"name":nameObj.name, "group":groupNum});
 		arr[index] = nameObj.name;
 
-	})
-	var links = linkFinder(script, topNames)
+	});
+  
+	var links = linkFinder(script, topNames);
 	noder(nodes, links);
 	
-}
+};
 function noder(nodes, links){
-	console.log("nodes",nodes)
+	console.log("nodes",nodes);
 	var width = 1000,
 	height = 1000;
-	var color = d3.scale.category20();
+	// var color = d3.scale.category20();
+  var color = d3.scale.linear()
+    .domain([0, 1])
+    .range(["pink", "blue"]);
 	var force = d3.layout.force()
 	.charge(-120)
 	.linkDistance(200)
