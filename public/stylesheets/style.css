@@ -25,3 +25,7 @@ color: white;
     background-color: white;
     color: #197EC1
 }
+
+#results{
+  display: none;
+}

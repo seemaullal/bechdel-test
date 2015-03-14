@@ -105,10 +105,22 @@ var commonWords = [
   "yet",
   "very",
   "every",
-  "many"
+  "many", 
+  "cut",
+  "scene",
+  "hall",
+  "hallway",
+  "miss",
+  "mr", 
+  "close", 
+  "angle"
 ];
+var womenNames = [];
+var tests = 0;
 var linkFinder = function(script, topNames){
   //
+  var ladyConvoCount = 0;
+  var linesAboutMen = 0
 	var nameCatcher = /\s[A-Z]+\s/g;
 	var names = script.match(nameCatcher);
 	names = names.filter(function(word){
@@ -122,10 +134,27 @@ var linkFinder = function(script, topNames){
 		var convo = {};
 		convo.personA = names[nameIndex];
 		convo.personB = names[nameIndex+1];
-		convo.line = lines[nameIndex];
+    console.log("convo",convo)
+    convo.line = lines[nameIndex];
+    if(womenNames.indexOf(convo.personA.trim()) > -1 && womenNames.indexOf(convo.personB.trim()) > -1){
+      ladyConvoCount++
+
+      if(convo.line.match(/he|him|his/)){
+        linesAboutMen++
+      }
+    }
+		
 		conversations.push(convo);
 	}
-	console.log("names",names);
+  $("#ladyConvoCount").text("We *think* there were "+ladyConvoCount+" converstations between women")
+	$("#linesAboutMen").text("We predict that "+linesAboutMen+ " of those conversations were about men")
+  if(ladyConvoCount > 0){
+    tests++;
+  }
+  if(ladyConvoCount > linesAboutMen){
+    tests++;
+  }
+  console.log("names",names);
 	console.log("lines",lines);
 	console.log("conversations",conversations);
 	links = [];
@@ -144,6 +173,7 @@ var linkFinder = function(script, topNames){
 };
 
 var analyzer = function(script){
+  script = script.replace(/(\r\n|\n|\r)/gm," ")
   //finds namey strings in script
 	var nameCatcher = /\s[A-Z]+\s/g;
 	var names = script.match(nameCatcher);
@@ -173,7 +203,8 @@ var analyzer = function(script){
 	
 
 	var nodes = [];
-
+  var genderCount = 0;
+  
   //go through each of the top names
 	async.each(topNames, function(nameObj, done){
 
@@ -182,10 +213,12 @@ var analyzer = function(script){
 
     //determine the gender of the name
     $.get('/api/gender/'+name, function(data){
-      
+
       //if the person's name is female-ish we give it a value of zero otherwise we declare it a 1
       if(data.gender == "female"){
         groupNum = 0
+        genderCount++
+        womenNames.push(name)
       }else{
         groupNum = 1
       }
@@ -205,6 +238,19 @@ var analyzer = function(script){
     console.log('nodes',nodes);
     console.log('links',links);
     noder(nodes, links);
+    $("#womanCount").text("There are "+genderCount+" major characters with womanly names:")
+    $("#womanNames").text("We found these top lady characters: "+womenNames)
+    if(womenNames.length >=2){
+      tests++
+    }
+    if(tests == 3){
+      $("#finalResult").text("We feel pretty confident that this movie passes")
+    }else if(tests == 2){
+     $("#finalResult").text("This movie probably does not pass the Bechdel Test")
+   }else{
+     $("#finalResult").text("If we had to guess, we'd say this movie does not pass the Bechdel Test")
+    }
+
   });
 	
 };
@@ -296,12 +342,6 @@ function tomatoesAreFruit(movieName) {
       var genders = [];
       names = _.uniq(names);
       names.forEach(function(name, index, arr){
-      //   setTimeout(function(){ 
-      //     var name = nameObj.name.trim()
-      //     $.get("https://gender-api.com/get?name="+name+"&key=PUTKEYHERE",function(data){
-      //       genders.push(data.gender)
-      //   }); 
-      // }, 1000);
         
         var groupNum = Math.floor(Math.random()*2);
         nodes.push({"name":name, "group":groupNum});
@@ -335,8 +375,12 @@ function tomatoesAreFruit(movieName) {
 $(document).ready(function(){
     $("#splitAnalysis").click(function(){
     	analyzer($("#script").val());
+      $("#movieNameDisplay").text($("#movieName").val())
+      $("#results").show();
     });
     $("#tomatoesAnalysis").click(function(){
         tomatoesAreFruit($("#movieName").val());
+        $("#movieNameDisplay").text($("#movieName").val())
+        $("#results").show();
     });
 });
