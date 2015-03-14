@@ -108,6 +108,7 @@ var commonWords = [
   "many"
 ];
 var linkFinder = function(script, topNames){
+  //
 	var nameCatcher = /\s[A-Z]+\s/g;
 	var names = script.match(nameCatcher);
 	names = names.filter(function(word){
@@ -128,7 +129,10 @@ var linkFinder = function(script, topNames){
 	console.log("lines",lines);
 	console.log("conversations",conversations);
 	links = [];
+  
+  console.log("topNames", topNames)
 	conversations.forEach(function(convo){
+
 		var source = topNames.indexOf(convo.personA);
 		var target = topNames.indexOf(convo.personB);
 		if (source > -1 && target > -1){
@@ -140,9 +144,10 @@ var linkFinder = function(script, topNames){
 };
 
 var analyzer = function(script){
+  //finds namey strings in script
 	var nameCatcher = /\s[A-Z]+\s/g;
 	var names = script.match(nameCatcher);
-	var nameAndGenders = {};
+  //filter out returns and spaces and such from the names
 	names = names.filter(function(word){
 		word = word.replace(/(\r\n|\n|\r)/gm,"").trim();
 		return word.length > 1 && (commonWords.indexOf(word.toLowerCase())== -1);
@@ -150,8 +155,10 @@ var analyzer = function(script){
 
 	// names = _.uniq(names);
 
+  //count all the names
 	var counts = _.countBy(names);
-	console.log("counts", counts);
+	
+  //sort the names by most frequent
 	var sorted = _.chain(counts).
 		map(function(cnt,name){
 			return{
@@ -160,25 +167,40 @@ var analyzer = function(script){
 				};
 			})
 		.sortBy('count').value();
-	console.log(sorted);
+	
+  //return the topNames 
 	var topNames = sorted.reverse().slice(0,10);
-	console.log(topNames);
+	
+
 	var nodes = [];
-  var genders = [];
+
+  //go through each of the top names
 	async.each(topNames, function(nameObj, done){
+
+    //further trim whitespace from names
     var name = nameObj.name.trim()
+
+    //determine the gender of the name
     $.get('/api/gender/'+name, function(data){
-      console.log(data)
+      
+      //if the person's name is female-ish we give it a value of zero otherwise we declare it a 1
       if(data.gender == "female"){
         groupNum = 0
       }else{
         groupNum = 1
       }
+      //we push a new node with name and gender value to our array
       nodes.push({"name":nameObj.name, "group":groupNum});
-      nameObj = name;
+
+      //we make topNames an array of strings rather than objects
+      // topNames[topNames.indexOf(nameObj)] = name;
+
       done();
     })
 	}, function(){
+    topNames = topNames.map(function(nameObj){
+      return nameObj.name
+    })
     var links = linkFinder(script, topNames);
     console.log('nodes',nodes);
     console.log('links',links);
@@ -311,7 +333,6 @@ function tomatoesAreFruit(movieName) {
 }
 
 $(document).ready(function(){
-	console.log("is this on?");
     $("#splitAnalysis").click(function(){
     	analyzer($("#script").val());
     });
