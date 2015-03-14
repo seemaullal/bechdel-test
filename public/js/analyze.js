@@ -161,28 +161,29 @@ var analyzer = function(script){
 			})
 		.sortBy('count').value();
 	console.log(sorted);
-	var topNames = sorted.reverse().slice(0,50);
+	var topNames = sorted.reverse().slice(0,10);
 	console.log(topNames);
 	var nodes = [];
   var genders = [];
-	topNames.forEach(function(nameObj, index, arr){
-  //   setTimeout(function(){ 
-  //     var name = nameObj.name.trim()
-  //     $.get("https://gender-api.com/get?name="+name+"&key=PUTKEYHERE",function(data){
-  //       genders.push(data.gender)
-  //   }); 
-  // }, 1000);
-    
-    var groupNum = Math.floor(Math.random()*2);
-		nodes.push({"name":nameObj.name, "group":groupNum});
-		arr[index] = nameObj.name;
-
-	});
-  
-	var links = linkFinder(script, topNames);
-  console.log('nodes',nodes);
-  console.log('links',links);
-	noder(nodes, links);
+	async.each(topNames, function(nameObj, done){
+    var name = nameObj.name.trim()
+    $.get('/api/gender/'+name, function(data){
+      console.log(data)
+      if(data.gender == "female"){
+        groupNum = 0
+      }else{
+        groupNum = 1
+      }
+      nodes.push({"name":nameObj.name, "group":groupNum});
+      nameObj = name;
+      done();
+    })
+	}, function(){
+    var links = linkFinder(script, topNames);
+    console.log('nodes',nodes);
+    console.log('links',links);
+    noder(nodes, links);
+  });
 	
 };
 function noder(nodes, links, tomato){
