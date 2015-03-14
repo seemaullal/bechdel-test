@@ -17,7 +17,7 @@ stroke: #fff;
 stroke-width: 1.5px;
 }
 .link {
-stroke: #999;
+stroke: #010005;
 stroke-opacity: .6;
 }
 </style>
@@ -25,8 +25,14 @@ stroke-opacity: .6;
 	<div class="container">
 		<h1 text-center>Do you know if your favorite movie passes the Bechdel test?</h1>
 		<textarea type="text" class="form-control" id="script" rows="10"></textarea>
+		<input type="text" class="form-control" id="movieName" placeholder="Enter movie name if running tomato analysis">
 		<button type="button" class="btn btn-white" id="tomatoesAnalysis">Tomato Analysis</button>
 		<button type="button" class="btn btn-white"id="splitAnalysis">Split Analysis</button>
+		<br>
+		<!-- <div class="panel panel-default">
+  		<div id="panelText" class="panel-body"> -->
+  		<!-- </div> -->
+</div>
 	</div>
 	<script src="http://d3js.org/d3.v3.min.js"></script>
 	<script src="js/analyze.js"></script>

@@ -127,19 +127,18 @@ var linkFinder = function(script, topNames){
 	console.log("names",names);
 	console.log("lines",lines);
 	console.log("conversations",conversations);
-	links = []
+	links = [];
 	conversations.forEach(function(convo){
 		var source = topNames.indexOf(convo.personA);
 		var target = topNames.indexOf(convo.personB);
 		if (source > -1 && target > -1){
-			link = {"source": source, "target":target, "value":2}
-			links.push(link)
+			link = {"source": source, "target":target, "value":2};
+			links.push(link);
 		}
-	})
-	return links
-	//
-	//
-}
+	});
+	return links;
+};
+
 var analyzer = function(script){
 	var nameCatcher = /\s[A-Z]+\s/g;
 	var names = script.match(nameCatcher);
@@ -148,22 +147,24 @@ var analyzer = function(script){
 		word = word.replace(/(\r\n|\n|\r)/gm,"").trim();
 		return word.length > 1 && (commonWords.indexOf(word.toLowerCase())== -1);
 	});
-	
+
+	// names = _.uniq(names);
+
 	var counts = _.countBy(names);
-	console.log("counts", counts)
+	console.log("counts", counts);
 	var sorted = _.chain(counts).
 		map(function(cnt,name){
 			return{
 				name:name,
 				count:cnt
-				}
+				};
 			})
 		.sortBy('count').value();
 	console.log(sorted);
 	var topNames = sorted.reverse().slice(0,50);
 	console.log(topNames);
 	var nodes = [];
-  var genders = []
+  var genders = [];
 	topNames.forEach(function(nameObj, index, arr){
   //   setTimeout(function(){ 
   //     var name = nameObj.name.trim()
@@ -172,18 +173,20 @@ var analyzer = function(script){
   //   }); 
   // }, 1000);
     
-    var groupNum = Math.floor(Math.random()*2)
+    var groupNum = Math.floor(Math.random()*2);
 		nodes.push({"name":nameObj.name, "group":groupNum});
 		arr[index] = nameObj.name;
 
-	})
+	});
   
-	var links = linkFinder(script, topNames)
+	var links = linkFinder(script, topNames);
+  console.log('nodes',nodes);
+  console.log('links',links);
 	noder(nodes, links);
 	
-}
-function noder(nodes, links){
-	console.log("nodes",nodes)
+};
+function noder(nodes, links, tomato){
+	console.log("nodes",nodes);
 	var width = 1000,
 	height = 1000;
 	// var color = d3.scale.category20();
@@ -212,7 +215,20 @@ function noder(nodes, links){
 	.data(nodes)
 	.enter().append("circle")
 	.attr("class", "node")
-	.attr("r", 5)
+	.attr("r", function (datum, index) {
+      if (tomato) {
+        return links.filter(function (link) { 
+          return link.source.index == index;
+        })
+        .length;
+      }
+      else {
+        return links.filter(function (link) { 
+          return link.source.index == index;
+        })
+        .length/25; 
+      }
+  })
 	.style("fill", function(d) { return color(d.group); })
 	.call(force.drag);
 	node.append("title")
@@ -228,13 +244,77 @@ function noder(nodes, links){
 	});
 
 }
+function tomatoesAreFruit(movieName) {
+  $.get('/api/getcast/' + movieName, function (data) {
+    var chars = data;
+    chars.forEach( function(character,index,arr) {
+      arr[index] = character.toUpperCase().trim();
+    });
+    var re = new RegExp(chars.join("|"), "g");
+    var script2 = $("#script").val();
+    script = script2.replace(/(\r\n|\n|\r)/gm,"").replace(/\s+/g," ");
+    script.replace('↵','');
+    var names = script.match(re);
+    var lines = script.split(re);
+    var conversations = [];
+    for(var nameIndex = 0; nameIndex < (names.length-1); nameIndex++){
+      var convo = {};
+      convo.personA = names[nameIndex];
+      convo.personB = names[nameIndex+1];
+      // if (convo.personA !== convo.personB) {
+      convo.line = lines[nameIndex];
+      if (convo.line && convo.line.toUpperCase() !== convo.line) {
+        convo.line = convo.line.replace(/\b([A-Z]{2,})\b/g,"");
+        conversations.push(convo);
+      }
+    }
+    console.log(conversations);
+      var nodes = [];
+      var genders = [];
+      names = _.uniq(names);
+      names.forEach(function(name, index, arr){
+      //   setTimeout(function(){ 
+      //     var name = nameObj.name.trim()
+      //     $.get("https://gender-api.com/get?name="+name+"&key=PUTKEYHERE",function(data){
+      //       genders.push(data.gender)
+      //   }); 
+      // }, 1000);
+        
+        var groupNum = Math.floor(Math.random()*2);
+        nodes.push({"name":name, "group":groupNum});
+      });
+    var links = [ ];
+    conversations.forEach(function(convo){
+        var source = names.indexOf(convo.personA);
+        var target = names.indexOf(convo.personB);
+        if (source > -1 && target > -1){
+          link = {"source": source, "target":target, "value":2};
+          links.push(link);
+        }
+      });
+      // }
+      // else {
+      //   convo.line = lines[nameIndex];
+      //   while (convo.personA == convo.personB) {
+      //     nameIndex++;
+      //     convo.line += lines[nameIndex];
+      //     convo.personB = names[nameIndex];
+      //   }
+      //   if (convo.line && convo.line.toUpperCase() !== convo.line) {
+      //     convo.line = convo.line.replace(/\b([A-Z]{2,})\b/g,"");
+      //     conversations.push(convo);
+      //   }
+      // }
+    noder(nodes, links, true);
+});
+}
 
 $(document).ready(function(){
-	console.log("is this on?")
+	console.log("is this on?");
     $("#splitAnalysis").click(function(){
-    	analyzer($("#script").val())
+    	analyzer($("#script").val());
     });
     $("#tomatoesAnalysis").click(function(){
-
-    })
+        tomatoesAreFruit($("#movieName").val());
+    });
 });
