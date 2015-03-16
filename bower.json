@@ -1,11 +1,11 @@
 {
   "name": "WhoStack",
   "version": "0.0.0",
-  "homepage": "https://github.com/seemaullal/WhoStack",
+  "homepage": "https://github.com/seemaullal",
   "authors": [
     "Seema <seemaullal@gmail.com>"
   ],
-  "description": "Learn new names and faces",
+  "description": "Does your favorite movie pass the bechdel test",
   "main": "app.js",
   "keywords": [
     "slackapi"
