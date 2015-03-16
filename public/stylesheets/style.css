@@ -29,7 +29,12 @@ color: white;
 #results{
   display: none;
 }
+
 #tryAgain{
   display:none;
   
+}
+
+svg {
+  margin-top: -275px;
 }

@@ -214,7 +214,7 @@ var analyzer = function(script){
 
     //determine the gender of the name
     $.get('/api/gender/'+name, function(data){
-      console.log("dataFromApi",data)
+      console.log("dataFromApi",data);
       //if the person's name is female-ish we give it a value of zero otherwise we declare it a 1
       if(data.gender == "female"){
         groupNum = 0;
@@ -250,10 +250,10 @@ var analyzer = function(script){
    }else{
      $("#finalResult").text("If we had to guess, we'd say this movie does not pass the Bechdel Test");
     }
-    $("#loading").hide()
-    $("#tryAgain").show()
+    $("#loading").hide();
+    $("#tryAgain").show(); 
   });
-	
+
 };
 function noder(nodes, links, tomato){
 	console.log("nodes",nodes);
@@ -288,6 +288,7 @@ function noder(nodes, links, tomato){
 	.attr("r", function (datum, index) {
       if (tomato) {
         return links.filter(function (link) { 
+          console.log('link',link);
           return link.source.index == index;
         })
         .length/5;
@@ -316,13 +317,18 @@ function noder(nodes, links, tomato){
 }
 function tomatoesAreFruit(movieName) {
   var chars = [];
+  var ladyConvoCount = 0;
+  var linesAboutMen = 0;
   var genderCount = 0;
+  var formattedChars = [ ];
   $.get('/api/getcast/' + movieName, function (data) {
     chars = data;
     chars.forEach( function(character,index,arr) {
-      arr[index] = character.toUpperCase().trim().split(" ")[0];
+      if(character) {
+        formattedChars.push(character.toUpperCase().trim().split(" ")[0]);  
+      }
     });
-
+    chars = formattedChars;
     var re = new RegExp(chars.join("|"), "g");
     var script2 = $("#script").val();
     script = script2.replace(/(\r\n|\n|\r)/gm,"").replace(/\s+/g," ");
@@ -342,8 +348,7 @@ function tomatoesAreFruit(movieName) {
       }
     }
     var nodes = [];
-    var genders = [];
-    names = [ ];
+    var nodeNames = [ ];
     async.each(chars, function(name, done) {
       $.get('/api/gender/'+name, function(data){
         if(data.gender == "female"){
@@ -354,15 +359,15 @@ function tomatoesAreFruit(movieName) {
           groupNum = 1;
         }
         nodes.push({"name":name, "group":groupNum});
-        names.push(name);
+        nodeNames.push(name);
         done();
        });
     }, 
     function() {
       var links = [ ];
       conversations.forEach(function(convo){
-          var source = names.indexOf(convo.personA);
-          var target = names.indexOf(convo.personB);
+          var source = nodeNames.indexOf(convo.personA);
+          var target = nodeNames.indexOf(convo.personB);
           if (source > -1 && target > -1){
             if(womenNames.indexOf(convo.personA.trim()) > -1 && womenNames.indexOf(convo.personB.trim()) > -1){
               ladyConvoCount++;
@@ -375,9 +380,16 @@ function tomatoesAreFruit(movieName) {
             links.push(link);
           }
         });
-      $("#womanCount").text("There are "+genderCount+" major characters with womanly names:");
-    $("#womanNames").text("We found these top lady characters: "+womenNames);
-      $("#ladyConvoCount").text("We *think* there were "+ladyConvoCount+" converstations between women");
+      links.forEach(function (link) {
+        if (link.source > nodes.length || link.target > nodes.length)
+          console.log(link);
+      });
+      if(womenNames.length >=2){
+        tests++;
+      }
+      $("#womanCount").text("There are "+genderCount+" major characters with womanly names: " + womenNames.join(", "));
+      console.log('ladyconvos',ladyConvoCount);
+      $("#ladyConvoCount").text("We *think* there were "+ladyConvoCount+" conversations between women");
       $("#linesAboutMen").text("We predict that "+linesAboutMen+ " of those conversations were about men");
       if(ladyConvoCount > 0){
         tests++;
@@ -393,6 +405,9 @@ function tomatoesAreFruit(movieName) {
         $("#finalResult").text("If we had to guess, we'd say this movie does not pass the Bechdel Test");
        }
       noder(nodes, links, true);
+      $("#loading").hide();
+      $("#tryAgain").show();
+      $("#movieNameDisplay").text($("#movieName").val());
     });
     
       // }
@@ -414,17 +429,17 @@ function tomatoesAreFruit(movieName) {
 
 $(document).ready(function(){
     $("#splitAnalysis").click(function(){
-    	analyzer($("#script").val());
+      analyzer($("#script").val());
       $("#movieNameDisplay").text($("#movieName").val());
       $("#results").show();
-      $("#form").hide()
+      $("#form").hide();
     });
     $("#tomatoesAnalysis").click(function(){
         tomatoesAreFruit($("#movieName").val());
-        $("#movieNameDisplay").text($("#movieName").val());
         $("#results").show();
+        $("#form").hide();
     });
     $("#tryAgain").click(function(){
-      location.reload()
-    })
+      location.reload();
+    });
 });
