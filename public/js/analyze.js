@@ -8,6 +8,7 @@ var commonWords = [
   "in",
   "int",
   "that",
+  "night",
   "have",
   "I",
   "it",
@@ -350,6 +351,7 @@ function tomatoesAreFruit(movieName) {
     var nodes = [];
     var nodeNames = [ ];
     async.each(chars, function(name, done) {
+      name = name.replace('/','');
       $.get('/api/gender/'+name, function(data){
         if(data.gender == "female"){
           groupNum = 0;
@@ -428,6 +430,16 @@ function tomatoesAreFruit(movieName) {
 }
 
 $(document).ready(function(){
+  $('#what').click(function() {
+    $('#what').hide();
+    $('.mainPart').hide();
+    $('#instructions').show();
+  });
+  $('#close-about').click(function() {
+    $('#instructions').hide();
+    $('#what').show();
+    $('.mainPart').show();
+  });
     $("#splitAnalysis").click(function(){
       analyzer($("#script").val());
       $("#movieNameDisplay").text($("#movieName").val());

@@ -10,6 +10,7 @@
 	<script src="jquery/dist/jquery.min.js"></script>
 	<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="stylesheets/style.css">
 </head>
 <style>
@@ -23,6 +24,28 @@ stroke-opacity: .6;
 }
 </style>
 <body>
+<div id='what'>About</div>
+	<div id='instructions'>
+		<div id="close-about">X</div>
+		<h2 id="title" class="text-center">Bechdelerator</h2>
+		<div id="about">
+		<p>
+		The Bechdel Test was created by writer Alison Bechdel in the comic strip "Dykes To Watch Out For" as a way to detect female representation in Hollywood movies. A movie passes the test if it:
+		<ol>
+			<li> It includes at least two female characters</li>
+			<li> who have at least one coversation with each other</li>
+			<li> that is about a topic other than a man</li>
+		</ol> 
+		</p>
+		<p>
+		The Bechdelerator predicts whether movies pass the Bechdel test by analyzing their scripts, identifying conversations between characters, and determining whether those conversations pass the requirements of the test. It also provides a graph of the conversations between different characters where node size represents the number of conversations a character has, node color shows gender of the character (blue for men and pink for women), and links represent if two character conversed in the movie.
+		</p>
+		<p>
+		To see if your favorite movie passes the test, paste its movie script below (scripts can be found <a href="http://www.imsdb.com/all%20scripts/">here</a>) and include its name. Tomato analysis identifies characters based on Rotten Tomatoes while Split Analysis identifies characters through our own parsing algorithm.
+		</p>
+		</div>
+	</div>
+	<div class="mainPart">
 	<div id="form" class="container">
 		<h1 text-center>Do you know if your favorite movie passes the Bechdel test?</h1>
 		<textarea type="text" class="form-control" id="script" rows="10"></textarea>
@@ -46,14 +69,8 @@ stroke-opacity: .6;
 		<div class="text-center" id="tryAgain">
 			<button type="button" class="btn btn-white" >Try Another Script</button>
 		</div>
-
 	</div>
-	
-	
-	<!-- <div class="panel panel-default">
-		<div id="panelText" class="panel-body"> -->
-			<!-- </div> -->
-		</div>
+	</div>
 		<script src="http://d3js.org/d3.v3.min.js"></script>
 		<script src="js/analyze.js"></script>
 	</body>
