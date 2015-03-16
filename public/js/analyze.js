@@ -321,10 +321,8 @@ function tomatoesAreFruit(movieName) {
   $.get('/api/getcast/' + movieName, function (data) {
     chars = data;
     chars.forEach( function(character,index,arr) {
-      arr[index] = character.toUpperCase().trim();
+      arr[index] = character.toUpperCase().trim().split(" ")[0];
     });
-
-
 
     var re = new RegExp(chars.join("|"), "g");
     var script2 = $("#script").val();
@@ -346,7 +344,7 @@ function tomatoesAreFruit(movieName) {
     }
     var nodes = [];
     var genders = [];
-    var names = [ ];
+    names = [ ];
     async.each(chars, function(name, done) {
       $.get('/api/gender/'+name, function(data){
         if(data.gender == "female"){
@@ -418,12 +416,12 @@ function tomatoesAreFruit(movieName) {
 $(document).ready(function(){
     $("#splitAnalysis").click(function(){
     	analyzer($("#script").val());
-      $("#movieNameDisplay").text($("#movieName").val())
+      $("#movieNameDisplay").text($("#movieName").val());
       $("#results").show();
     });
     $("#tomatoesAnalysis").click(function(){
         tomatoesAreFruit($("#movieName").val());
-        $("#movieNameDisplay").text($("#movieName").val())
+        $("#movieNameDisplay").text($("#movieName").val());
         $("#results").show();
     });
 });
