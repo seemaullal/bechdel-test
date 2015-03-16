@@ -6,6 +6,7 @@ var commonWords = [
   "and",
   "a",
   "in",
+  "int",
   "that",
   "have",
   "I",
@@ -120,7 +121,7 @@ var tests = 0;
 var linkFinder = function(script, topNames){
   //
   var ladyConvoCount = 0;
-  var linesAboutMen = 0
+  var linesAboutMen = 0;
 	var nameCatcher = /\s[A-Z]+\s/g;
 	var names = script.match(nameCatcher);
 	names = names.filter(function(word){
@@ -134,20 +135,21 @@ var linkFinder = function(script, topNames){
 		var convo = {};
 		convo.personA = names[nameIndex];
 		convo.personB = names[nameIndex+1];
-    console.log("convo",convo)
+    console.log("convo",convo);
     convo.line = lines[nameIndex];
-    if(womenNames.indexOf(convo.personA.trim()) > -1 && womenNames.indexOf(convo.personB.trim()) > -1){
-      ladyConvoCount++
+    if (convo.personA && convo.personB) {
+      if(womenNames.indexOf(convo.personA.trim()) > -1 && womenNames.indexOf(convo.personB.trim()) > -1){
+        ladyConvoCount++;
 
-      if(convo.line.match(/he|him|his/)){
-        linesAboutMen++
+        if(convo.line.match(/he|him|his/)){
+          linesAboutMen++;
+        }
       }
+  		conversations.push(convo);
     }
-		
-		conversations.push(convo);
 	}
-  $("#ladyConvoCount").text("We *think* there were "+ladyConvoCount+" converstations between women")
-	$("#linesAboutMen").text("We predict that "+linesAboutMen+ " of those conversations were about men")
+  $("#ladyConvoCount").text("We *think* there were "+ladyConvoCount+" converstations between women");
+	$("#linesAboutMen").text("We predict that "+linesAboutMen+ " of those conversations were about men");
   if(ladyConvoCount > 0){
     tests++;
   }
@@ -159,7 +161,7 @@ var linkFinder = function(script, topNames){
 	console.log("conversations",conversations);
 	links = [];
   
-  console.log("topNames", topNames)
+  console.log("topNames", topNames);
 	conversations.forEach(function(convo){
 
 		var source = topNames.indexOf(convo.personA);
@@ -173,7 +175,7 @@ var linkFinder = function(script, topNames){
 };
 
 var analyzer = function(script){
-  script = script.replace(/(\r\n|\n|\r)/gm," ")
+  script = script.replace(/(\r\n|\n|\r)/gm," ");
   //finds namey strings in script
 	var nameCatcher = /\s[A-Z]+\s/g;
 	var names = script.match(nameCatcher);
@@ -209,18 +211,18 @@ var analyzer = function(script){
 	async.each(topNames, function(nameObj, done){
 
     //further trim whitespace from names
-    var name = nameObj.name.trim()
+    var name = nameObj.name.trim();
 
     //determine the gender of the name
     $.get('/api/gender/'+name, function(data){
 
       //if the person's name is female-ish we give it a value of zero otherwise we declare it a 1
       if(data.gender == "female"){
-        groupNum = 0
-        genderCount++
-        womenNames.push(name)
+        groupNum = 0;
+        genderCount++;
+        womenNames.push(name);
       }else{
-        groupNum = 1
+        groupNum = 1;
       }
       //we push a new node with name and gender value to our array
       nodes.push({"name":nameObj.name, "group":groupNum});
@@ -229,26 +231,26 @@ var analyzer = function(script){
       // topNames[topNames.indexOf(nameObj)] = name;
 
       done();
-    })
+    });
 	}, function(){
     topNames = topNames.map(function(nameObj){
-      return nameObj.name
-    })
+      return nameObj.name;
+    });
     var links = linkFinder(script, topNames);
     console.log('nodes',nodes);
     console.log('links',links);
     noder(nodes, links);
-    $("#womanCount").text("There are "+genderCount+" major characters with womanly names:")
-    $("#womanNames").text("We found these top lady characters: "+womenNames)
+    $("#womanCount").text("There are "+genderCount+" major characters with womanly names:");
+    $("#womanNames").text("We found these top lady characters: "+womenNames);
     if(womenNames.length >=2){
-      tests++
+      tests++;
     }
     if(tests == 3){
-      $("#finalResult").text("We feel pretty confident that this movie passes")
+      $("#finalResult").text("We feel pretty confident that this movie passes");
     }else if(tests == 2){
-     $("#finalResult").text("This movie probably does not pass the Bechdel Test")
+     $("#finalResult").text("This movie probably does not pass the Bechdel Test");
    }else{
-     $("#finalResult").text("If we had to guess, we'd say this movie does not pass the Bechdel Test")
+     $("#finalResult").text("If we had to guess, we'd say this movie does not pass the Bechdel Test");
     }
 
   });
@@ -289,7 +291,7 @@ function noder(nodes, links, tomato){
         return links.filter(function (link) { 
           return link.source.index == index;
         })
-        .length;
+        .length/5;
       }
       else {
         return links.filter(function (link) { 
@@ -314,11 +316,16 @@ function noder(nodes, links, tomato){
 
 }
 function tomatoesAreFruit(movieName) {
+  var chars = [];
+  var genderCount = 0;
   $.get('/api/getcast/' + movieName, function (data) {
-    var chars = data;
+    chars = data;
     chars.forEach( function(character,index,arr) {
       arr[index] = character.toUpperCase().trim();
     });
+
+
+
     var re = new RegExp(chars.join("|"), "g");
     var script2 = $("#script").val();
     script = script2.replace(/(\r\n|\n|\r)/gm,"").replace(/\s+/g," ");
@@ -337,24 +344,60 @@ function tomatoesAreFruit(movieName) {
         conversations.push(convo);
       }
     }
-    console.log(conversations);
-      var nodes = [];
-      var genders = [];
-      names = _.uniq(names);
-      names.forEach(function(name, index, arr){
-        
-        var groupNum = Math.floor(Math.random()*2);
-        nodes.push({"name":name, "group":groupNum});
-      });
-    var links = [ ];
-    conversations.forEach(function(convo){
-        var source = names.indexOf(convo.personA);
-        var target = names.indexOf(convo.personB);
-        if (source > -1 && target > -1){
-          link = {"source": source, "target":target, "value":2};
-          links.push(link);
+    var nodes = [];
+    var genders = [];
+    var names = [ ];
+    async.each(chars, function(name, done) {
+      $.get('/api/gender/'+name, function(data){
+        if(data.gender == "female"){
+          groupNum = 0;
+          genderCount++;
+          womenNames.push(name);
+        } else{
+          groupNum = 1;
         }
-      });
+        nodes.push({"name":name, "group":groupNum});
+        names.push(name);
+        done();
+       });
+    }, 
+    function() {
+      var links = [ ];
+      conversations.forEach(function(convo){
+          var source = names.indexOf(convo.personA);
+          var target = names.indexOf(convo.personB);
+          if (source > -1 && target > -1){
+            if(womenNames.indexOf(convo.personA.trim()) > -1 && womenNames.indexOf(convo.personB.trim()) > -1){
+              ladyConvoCount++;
+
+              if(convo.line.match(/he|him|his/)){
+                linesAboutMen++;
+              }
+            }
+            link = {"source": source, "target":target, "value":2};
+            links.push(link);
+          }
+        });
+      $("#womanCount").text("There are "+genderCount+" major characters with womanly names:");
+    $("#womanNames").text("We found these top lady characters: "+womenNames);
+      $("#ladyConvoCount").text("We *think* there were "+ladyConvoCount+" converstations between women");
+      $("#linesAboutMen").text("We predict that "+linesAboutMen+ " of those conversations were about men");
+      if(ladyConvoCount > 0){
+        tests++;
+      }
+      if(ladyConvoCount > linesAboutMen){
+        tests++;
+      }
+       if(tests == 3){
+         $("#finalResult").text("We feel pretty confident that this movie passes");
+       }else if(tests == 2){
+        $("#finalResult").text("This movie probably does not pass the Bechdel Test");
+      }else{
+        $("#finalResult").text("If we had to guess, we'd say this movie does not pass the Bechdel Test");
+       }
+      noder(nodes, links, true);
+    });
+    
       // }
       // else {
       //   convo.line = lines[nameIndex];
@@ -368,7 +411,7 @@ function tomatoesAreFruit(movieName) {
       //     conversations.push(convo);
       //   }
       // }
-    noder(nodes, links, true);
+  
 });
 }
 
