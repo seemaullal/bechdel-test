@@ -29,3 +29,7 @@ color: white;
 #results{
   display: none;
 }
+#tryAgain{
+  display:none;
+  
+}

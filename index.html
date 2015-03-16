@@ -23,27 +23,34 @@ stroke-opacity: .6;
 }
 </style>
 <body>
-	<div class="container">
+	<div id="form" class="container">
 		<h1 text-center>Do you know if your favorite movie passes the Bechdel test?</h1>
 		<textarea type="text" class="form-control" id="script" rows="10"></textarea>
 		<input type="text" class="form-control" id="movieName" placeholder="Enter movie name if running tomato analysis">
 		<button type="button" class="btn btn-white" id="tomatoesAnalysis">Tomato Analysis</button>
 		<button type="button" class="btn btn-white"id="splitAnalysis">Split Analysis</button>
 		<br>
-		<div class="text-center" id="results">
-			<h1 id="movieNameDisplay"></h1>
-			<h2 id="womanCount"></h2>
-			<h2 id="womanNames"></h2>
-			<h2 id="ladyConvoCount"></h2>
-			<h2 id="linesAboutMen"></h2>
-			<h2 id="finalResult"></h2>
-			<h2>For a visual representation of male and female characters and their conversations scroll down</h2>
-		</div>
-		<!-- <div class="panel panel-default">
-  		<div id="panelText" class="panel-body"> -->
-  		<!-- </div> -->
-</div>
 	</div>
-	<script src="http://d3js.org/d3.v3.min.js"></script>
-	<script src="js/analyze.js"></script>
-</body>
+	<div class="text-center container" id="results">
+		
+		<img id="loading" src="http://sierrafire.cr.usgs.gov/images/loading.gif" />
+		<div id="visualization"></div>
+		<h1 id="movieNameDisplay"></h1>
+		<h3 id="womanCount"></h3>
+		<h3 id="ladyConvoCount"></h3>
+		<h3 id="linesAboutMen"></h3>
+		<h2 id="finalResult"></h2>
+		<div class="text-center" id="tryAgain">
+			<button type="button" class="btn btn-white" >Try Another Script</button>
+		</div>
+
+	</div>
+	
+	
+	<!-- <div class="panel panel-default">
+		<div id="panelText" class="panel-body"> -->
+			<!-- </div> -->
+		</div>
+		<script src="http://d3js.org/d3.v3.min.js"></script>
+		<script src="js/analyze.js"></script>
+	</body>

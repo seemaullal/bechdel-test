@@ -58,7 +58,7 @@ router.get('/api/getcast/:moviename', function(req,res) {
 router.get("/api/gender/:name", function(req,res){
 	var name = req.params.name
 	setTimeout(function(){   
-      request({url:"https://gender-api.com/get?name="+name+"&key=VFdWHejMrYUKKGApzE"},function(err, response, data){
+      request({url:"https://gender-api.com/get?name="+name+"&key=fgAjbbeMpbLUJyePnd"},function(err, response, data){
         data =JSON.parse(data)
         res.send(data);
     	}); 
