@@ -77,7 +77,7 @@ color: white;
 
 #tryAgain{
   display:none;
-  display:inline-block;
+  float:right;
   z-index: 10;
   
 }
