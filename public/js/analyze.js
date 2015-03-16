@@ -135,7 +135,6 @@ var linkFinder = function(script, topNames){
 		var convo = {};
 		convo.personA = names[nameIndex];
 		convo.personB = names[nameIndex+1];
-    console.log("convo",convo);
     convo.line = lines[nameIndex];
     if (convo.personA && convo.personB) {
       if(womenNames.indexOf(convo.personA.trim()) > -1 && womenNames.indexOf(convo.personB.trim()) > -1){
@@ -148,7 +147,7 @@ var linkFinder = function(script, topNames){
   		conversations.push(convo);
     }
 	}
-  $("#ladyConvoCount").text("We *think* there were "+ladyConvoCount+" converstations between women");
+  $("#ladyConvoCount").text("We *think* there were "+ladyConvoCount+" conversations between women");
 	$("#linesAboutMen").text("We predict that "+linesAboutMen+ " of those conversations were about men");
   if(ladyConvoCount > 0){
     tests++;
@@ -215,7 +214,7 @@ var analyzer = function(script){
 
     //determine the gender of the name
     $.get('/api/gender/'+name, function(data){
-
+      console.log("dataFromApi",data)
       //if the person's name is female-ish we give it a value of zero otherwise we declare it a 1
       if(data.gender == "female"){
         groupNum = 0;
@@ -240,8 +239,7 @@ var analyzer = function(script){
     console.log('nodes',nodes);
     console.log('links',links);
     noder(nodes, links);
-    $("#womanCount").text("There are "+genderCount+" major characters with womanly names:");
-    $("#womanNames").text("We found these top lady characters: "+womenNames);
+    $("#womanCount").text("There are "+genderCount+" major characters with womanly names: "+womenNames);
     if(womenNames.length >=2){
       tests++;
     }
@@ -252,7 +250,8 @@ var analyzer = function(script){
    }else{
      $("#finalResult").text("If we had to guess, we'd say this movie does not pass the Bechdel Test");
     }
-
+    $("#loading").hide()
+    $("#tryAgain").show()
   });
 	
 };
@@ -420,10 +419,14 @@ $(document).ready(function(){
     	analyzer($("#script").val());
       $("#movieNameDisplay").text($("#movieName").val())
       $("#results").show();
+      $("#form").hide()
     });
     $("#tomatoesAnalysis").click(function(){
         tomatoesAreFruit($("#movieName").val());
         $("#movieNameDisplay").text($("#movieName").val())
         $("#results").show();
     });
+    $("#tryAgain").click(function(){
+      location.reload()
+    })
 });
