@@ -71,11 +71,17 @@ color: white;
   font-weight: medium;
 }
 
+#buttonDiv {
+  z-index: 20 !important;
+}
+
 #tryAgain{
   display:none;
+  z-index: 10;
   
 }
 
 svg {
   margin-top: -275px;
+  z-index: -1;
 }
