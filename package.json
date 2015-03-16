@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-     "postinstall": "./bower_components/bower/bin/bower install"
+     "postinstall": "./node_modules/bower/bin/bower install"
   },
   "dependencies": {
     "bower" : "0.6.x",
