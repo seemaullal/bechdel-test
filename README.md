@@ -41,9 +41,10 @@ Tomato Analysis uses Rotten Tomatoes' API to identify major characters, while Sp
 
 #### Next Steps
 
-- Form Validation
-- Web Scraping to find movie scripts directly
-- Improve User Interface
+- Form validation
+- Web scraping to find movie scripts directly
+- Improve user interface
+- Store results in a database rather than regenerate results each time
 
 ## Contributors
 * __Seema Ullal__ - [LinkedIn](https://www.linkedin.com/profile/in/seemaullal) | [GitHub](https://github.com/seemaulla)
