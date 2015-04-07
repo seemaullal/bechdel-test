@@ -16,6 +16,7 @@
 
 ![Picture](http://i.imgur.com/9J43xR5.png)
 _Above: The Bechderator analyzes the 1995 cult classic Clueless_
+
 See a live version of the app [here](http://bechdelerator.herokuapp.com/).
 
 
