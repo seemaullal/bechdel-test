@@ -409,21 +409,7 @@ function tomatoesAreFruit(movieName) {
       $("#tryAgain").show();
       $("#movieNameDisplay").text($("#movieName").val());
     });
-    
-      // }
-      // else {
-      //   convo.line = lines[nameIndex];
-      //   while (convo.personA == convo.personB) {
-      //     nameIndex++;
-      //     convo.line += lines[nameIndex];
-      //     convo.personB = names[nameIndex];
-      //   }
-      //   if (convo.line && convo.line.toUpperCase() !== convo.line) {
-      //     convo.line = convo.line.replace(/\b([A-Z]{2,})\b/g,"");
-      //     conversations.push(convo);
-      //   }
-      // }
-  
+
 });
 }
 
