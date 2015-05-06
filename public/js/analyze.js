@@ -1,122 +1,3 @@
-var commonWords = [
-  "the",
-  "be",
-  "to",
-  "of",
-  "and",
-  "a",
-  "in",
-  "int",
-  "that",
-  "night",
-  "have",
-  "I",
-  "it",
-  "for",
-  "not",
-  "on",
-  "with",
-  "he",
-  "as",
-  "you",
-  "do",
-  "at",
-  "this",
-  "but",
-  "his",
-  "by",
-  "from",
-  "they",
-  "we",
-  "say",
-  "her",
-  "she",
-  "or",
-  "an",
-  "will",
-  "my",
-  "one",
-  "all",
-  "would",
-  "there",
-  "their",
-  "what",
-  "so",
-  "up",
-  "out",
-  "if",
-  "about",
-  "who",
-  "get",
-  "which",
-  "go",
-  "me",
-  "when",
-  "make",
-  "can",
-  "like",
-  "time",
-  "no",
-  "just",
-  "him",
-  "know",
-  "take",
-  "people",
-  "into",
-  "year",
-  "your",
-  "good",
-  "some",
-  "could",
-  "them",
-  "see",
-  "other",
-  "than",
-  "then",
-  "now",
-  "look",
-  "only",
-  "come",
-  "its",
-  "over",
-  "think",
-  "also",
-  "back",
-  "after",
-  "use",
-  "two",
-  "how",
-  "our",
-  "work",
-  "first",
-  "well",
-  "way",
-  "even",
-  "new",
-  "want",
-  "because",
-  "any",
-  "these",
-  "give",
-  "day",
-  "most",
-  "us",
-  "here",
-  "such",
-  "much",
-  "yet",
-  "very",
-  "every",
-  "many", 
-  "cut",
-  "scene",
-  "hall",
-  "hallway",
-  "miss",
-  "mr", 
-  "close", 
-  "angle"
-];
 var womenNames = [];
 var tests = 0;
 var linkFinder = function(script, topNames){
@@ -415,17 +296,19 @@ function tomatoesAreFruit(movieName) {
 });
 }
 
-$(document).ready(function(){
-  $('#what').click(function() {
-    $('#what').hide();
-    $('.mainPart').hide();
-    $('#instructions').show();
-  });
-  $('#close-about').click(function() {
-    $('#instructions').hide();
-    $('#what').show();
-    $('.mainPart').show();
-  });
+$.getScript("js/commonwords.js", function(){
+
+  $(document).ready(function(){
+    $('#what').click(function() {
+      $('#what').hide();
+      $('.mainPart').hide();
+      $('#instructions').show();
+    });
+    $('#close-about').click(function() {
+      $('#instructions').hide();
+      $('#what').show();
+      $('.mainPart').show();
+    });
     $("#splitAnalysis").click(function(){
       analyzer($("#script").val());
       $("#movieNameDisplay").text($("#movieName").val());
@@ -433,11 +316,14 @@ $(document).ready(function(){
       $("#form").hide();
     });
     $("#tomatoesAnalysis").click(function(){
-        tomatoesAreFruit($("#movieName").val());
-        $("#results").show();
-        $("#form").hide();
+      tomatoesAreFruit($("#movieName").val());
+      $("#results").show();
+      $("#form").hide();
     });
     $("#tryAgain").click(function(){
       location.reload();
     });
+  });
+
 });
+
