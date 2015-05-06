@@ -312,7 +312,7 @@ $.getScript("js/commonwords.js", function(){
     $("#splitAnalysis").click(function(){
       analyzer($("#script").val());
       $("#movieNameDisplay").text($("#movieName").val());
-      $("#results").show();
+      $("#results").show()
       $("#form").hide();
     });
     $("#tomatoesAnalysis").click(function(){
