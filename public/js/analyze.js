@@ -95,24 +95,30 @@ var analyzer = function(script){
     var name = nameObj.name.trim();
 
     //determine the gender of the name
-    $.get('/api/gender/'+name, function(data){
-      console.log("dataFromApi",data);
-      //if the person's name is female-ish we give it a value of zero otherwise we declare it a 1
-      if(data.gender == "female"){
-        groupNum = 0;
-        genderCount++;
-        womenNames.push(name);
-      }else{
-        groupNum = 1;
-      }
-      //we push a new node with name and gender value to our array
-      nodes.push({"name":nameObj.name, "group":groupNum});
+    setTimeout(function(){ 
+      $.get('/api/gender/'+name, function(data){
+        console.log("dataFromApi",data);
+        if (data === "err with api"){
+          $('.panic').show();
+          done();
+        }
+        //if the person's name is female-ish we give it a value of zero otherwise we declare it a 1
+        if(data.gender == "female"){
+          groupNum = 0;
+          genderCount++;
+          womenNames.push(name);
+        }else{
+          groupNum = 1;
+        }
+        //we push a new node with name and gender value to our array
+        nodes.push({"name":nameObj.name, "group":groupNum});
 
-      //we make topNames an array of strings rather than objects
-      // topNames[topNames.indexOf(nameObj)] = name;
+        //we make topNames an array of strings rather than objects
+        // topNames[topNames.indexOf(nameObj)] = name;
 
-      done();
-    });
+        done();
+      });
+    }, 1000);
 	}, function(){
     topNames = topNames.map(function(nameObj){
       return nameObj.name;
@@ -152,7 +158,7 @@ function noder(nodes, links, tomato){
 	var svg = d3.select("body").append("svg")
 	.attr("width", width)
 	.attr("height", height);
-	d3.json("mis.json", function(error, graph) {
+  
 	force
 	.nodes(nodes)
 	.links(links)
@@ -194,7 +200,7 @@ function noder(nodes, links, tomato){
 	node.attr("cx", function(d) { return d.x; })
 	.attr("cy", function(d) { return d.y; });
 	});
-	});
+
 
 }
 function tomatoesAreFruit(movieName) {
@@ -233,6 +239,7 @@ function tomatoesAreFruit(movieName) {
     var nodeNames = [ ];
     async.each(chars, function(name, done) {
       name = name.replace('/','');
+    setTimeout(function(){ 
       $.get('/api/gender/'+name, function(data){
         if(data.gender == "female"){
           groupNum = 0;
@@ -245,6 +252,7 @@ function tomatoesAreFruit(movieName) {
         nodeNames.push(name);
         done();
        });
+    }, 1000);
     }, 
     function() {
       var links = [ ];
@@ -299,23 +307,27 @@ function tomatoesAreFruit(movieName) {
 $.getScript("js/commonwords.js", function(){
 
   $(document).ready(function(){
-    $('#what').click(function() {
+    $('#what').click(function(event) {
+      event.preventDefault();
       $('#what').hide();
       $('.mainPart').hide();
       $('#instructions').show();
     });
-    $('#close-about').click(function() {
+    $('#close-about').click(function(event) {
+      event.preventDefault();
       $('#instructions').hide();
       $('#what').show();
       $('.mainPart').show();
     });
-    $("#splitAnalysis").click(function(){
+    $("#splitAnalysis").click(function(event){
+      event.preventDefault();
       analyzer($("#script").val());
       $("#movieNameDisplay").text($("#movieName").val());
       $("#results").show();
       $("#form").hide();
     });
-    $("#tomatoesAnalysis").click(function(){
+    $("#tomatoesAnalysis").click(function(event){
+      event.preventDefault();
       tomatoesAreFruit($("#movieName").val());
       $("#results").show();
       $("#form").hide();

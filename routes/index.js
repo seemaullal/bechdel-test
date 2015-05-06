@@ -58,6 +58,11 @@ router.get('/api/getcast/:moviename', function(req,res) {
 router.get("/api/gender/:name", function(req,res){
 	var name = req.params.name;
 	request({url:"https://api.genderize.io/?name="+name},function(err, response, data){
+		if (err){
+			console.log("err",err)
+			res.send("err with api")
+			return
+		}
         data =JSON.parse(data);
         res.send(data);
     	});
