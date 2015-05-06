@@ -86,3 +86,6 @@ svg {
   margin-top: -275px;
   z-index: -1;
 }
+.panic {
+  display: none;
+}
