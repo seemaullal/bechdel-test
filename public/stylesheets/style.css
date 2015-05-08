@@ -8,7 +8,7 @@
     width:45%;
 }
 body {
-  background: #498467;
+  background: #59B889;
 }
 
 h1 {
@@ -44,9 +44,10 @@ color: white;
   width: 25px;
   margin-left: auto;
   margin-right: auto;
-  background-color: #EDE5A6;
-  color: #197EC1;
+  background-color: #322F30;
+  color: #DAE4DF;
   border-radius: 1px;
+  display:inline-block;
 }
 
 #title {
@@ -55,21 +56,20 @@ color: white;
   font-size: 30px;
 }
 #about {
-  width: 50%;
+  width: 65%;
   margin-left: auto;
   margin-right: auto;
   font-size: 18px;
 }
 
 #instructions {
-  position: absolute;
-  top:0;
-  left:0;
-  margin: 2%;
-  min-height: 86%;
-  min-width: 96%;
-  background-color: #592941;
-  color: #498467;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #322F30;
+  color: #DAE4DF;
   display: none;
   font-family: 'Roboto', serif;
   font-weight: medium;
@@ -92,4 +92,7 @@ svg {
 }
 .panic {
   display: none;
+}
+a{
+  color:#59B889;
 }
