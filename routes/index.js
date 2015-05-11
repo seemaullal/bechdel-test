@@ -1,30 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
-// var emitter = require('events').EventEmitter;
-var Crawler = require("js-crawler");
 
-// Crawler.setMaxListeners(0);
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	res.sendFile('./index.html', {root: './'});
-});
-
-router.get('/testcrawl', function(req, res) {
-
-	var crawler = new Crawler().configure({
-	  	// shouldCrawl: function(url) {
-	   //  	// return (url.indexOf("Movie Scripts") < 0 && url.indexOf("genre") < 0 && url.indexOf("alphabetical") < 0);
-	  	// },
-	  	depth: 3
-	});
-	var urls = [ ];
-	crawler.crawl('http://www.imsdb.com/all%20scripts/' , function onSuccess(page) {
-		console.log(page.url);
-		urls.push(page.url);
-		// res.send(page.url);
-	});
-	res.send(urls);
 });
 
 router.get('/api/getcast/:moviename', function(req,res) {
