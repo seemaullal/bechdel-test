@@ -24,42 +24,44 @@ stroke-opacity: .6;
 }
 </style>
 <body>
-<div id='what'>About</div>
-	<div id='instructions'>
-		<div id="close-about">X</div>
-		<h2 id="title" class="text-center">Bechdelerator</h2>
-		<div id="about">
-		<p>
-		The Bechdel Test was created by writer Alison Bechdel in the comic strip "Dykes To Watch Out For" as a way to detect female representation in Hollywood movies. A movie passes the test if it:
-		<ol>
-			<li> It includes at least two female characters</li>
-			<li> who have at least one coversation with each other</li>
-			<li> that is about a topic other than a man</li>
-		</ol> 
-		</p>
-		<p>
-		The Bechdelerator predicts whether movies pass the Bechdel test by analyzing their scripts, identifying conversations between characters, and determining whether those conversations pass the requirements of the test. It also provides a graph of the conversations between different characters where node size represents the number of conversations a character has, node color shows gender of the character (blue for men and pink for women), and links represent if two character conversed in the movie.
-		</p>
-		<p>
-		To see if your favorite movie passes the test, paste its movie script below (scripts can be found <a href="http://www.imsdb.com/all%20scripts/">here</a>) and include its name. Tomato analysis identifies characters based on Rotten Tomatoes while Split Analysis identifies characters through our own parsing algorithm.
-		</p>
-		</div>
+	<div id='what'>
+		About
 	</div>
 	<button id="tryAgain" type="button" class="btn btn-white" >Try Another Script</button>
+	<div id='instructions'>
+		<div id="close-about"><h4>X</h4></div>
+		<h2 id="title" class="text-center">Bechdelerator</h2>
+		<div id="about">
+			<p>
+			The Bechdel Test was created by writer <a target="_blank" href="http://en.wikipedia.org/wiki/Alison_Bechdel">Alison Bechdel</a> in the comic strip "Dykes To Watch Out For". A movie passes the test if it:
+			<ol>
+				<li> It includes at least two female characters</li>
+				<li> who have at least one coversation with each other</li>
+				<li> that is about a topic other than a man</li>
+			</ol> 
+			</p>
+			<p>
+			The Bechdelerator predicts whether movies pass the Bechdel test by analyzing their scripts, identifying conversations between characters, and determining whether those conversations pass the requirements of the test. It also provides a graph of the conversations between different characters where node size represents the number of conversations a character has, node color shows gender of the character (blue for men and pink for women), and links represent if two character conversed in the movie.
+			</p>
+			<p>
+			To see if your favorite movie passes the test, paste its movie script below (scripts can be found <a target="_blank" href="http://www.imsdb.com/all%20scripts/">here</a>) and include its name. Tomato analysis identifies characters based on Rotten Tomatoes while Split Analysis identifies characters through our own parsing algorithm.
+			</p>
+		</div>
+	</div>
 	<div class="mainPart">
-	<div id="form" class="container">
-		<h1 text-center>Do you know if your favorite movie passes the Bechdel test?</h1>
-		<textarea type="text" class="form-control" id="script" rows="10"></textarea>
-		<input type="text" class="form-control" id="movieName" placeholder="Enter movie name if running tomato analysis">
-		<br>
-		<div class='text-center'>
-		<button type="button" class="btn btn-white" id="tomatoesAnalysis">Tomato Analysis</button>
-		<button type="button" class="btn btn-white"id="splitAnalysis">Split Analysis</button>
+		<div id="form" class="container">
+			<h1 class="text-center" >Do you know if your favorite movie passes the Bechdel test?</h1>
+			<textarea type="text" class="form-control" id="script" rows="10"></textarea>
+			<input type="text" class="form-control" id="movieName" placeholder="Enter movie name if running tomato analysis">
+			<br>
+			<div class='text-center'>
+			<button type="button" class="btn btn-white" id="tomatoesAnalysis">Tomato Analysis</button>
+			<button type="button" class="btn btn-white"id="splitAnalysis">Split Analysis</button>
 		</div>
 		<br>
 	</div>
 	<div class="text-center container" id="results">
-		<h1 class = "panic">Whoops. We maxed out our API from too many movies. But if you check back next week you might have more luck</h1>
+		<h1 class="panic">Whoops. We maxed out our API from too many movies. But if you check back next week you might have more luck</h1>
 		<img id="loading" src="http://sierrafire.cr.usgs.gov/images/loading.gif" />
 		<div id="visualization"></div>
 		<h1 id="movieNameDisplay"></h1>
@@ -68,7 +70,7 @@ stroke-opacity: .6;
 		<h3 id="linesAboutMen"></h3>
 		<h2 id="finalResult"></h2>
 	</div>
-	</div>
+</div>
 		<script src="d3/d3.min.js"></script>
 		<script src="js/analyze.js"></script>
-	</body>
+</body>
