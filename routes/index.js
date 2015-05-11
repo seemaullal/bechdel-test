@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var request = require('request');
 var cheerio = require('cheerio');
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	res.sendFile('./index.html', {root: './'});
@@ -49,18 +50,24 @@ router.get("/api/gender/:name", function(req,res){
 });
 
 router.get('/scrape/:title', function(req, res){
+
 	var title = req.params.title +' Script';
 	var allMovies = 'http://www.imsdb.com/all%20scripts/';
+
 	request(allMovies, function(err, response, html){
-		if(err){
-			console.log("whooops", err);
-		}
 		var $ = cheerio.load(html);
-		console.log("title", title)
 		var stringy = "a[title='"+title+"']"
-		var whatIsThis = $(stringy).attr("href");
-		console.log("whatIsThis", whatIsThis)
-		res.end();
+		var linkToMovie = $(stringy).attr("href");
+
+		request("http://www.imsdb.com/"+linkToMovie, function(err, response, html){
+			if (err) console.log("err in second request", err)
+			// this doesn't work yet
+			// var $ = cheerio.load(html);
+			// var innerHTML2SearchBy = "Read "+title;
+			// var awesomeElement = "a:contains(" + innerHTML2SearchBy+ ")"
+			// console.log("hi there coolio", $(awesomeElement).html());
+			res.end();
+		})
 	})
 })
 
