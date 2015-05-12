@@ -49,6 +49,7 @@ router.get("/api/gender/:name", function(req,res){
   	});
 });
 
+//will scrape for a particular movie by title
 router.get('/scrape/:title', function(req, res){
 
 	var title = req.params.title +' Script';
@@ -75,6 +76,26 @@ router.get('/scrape/:title', function(req, res){
 			})
 
 		})
+	})
+})
+
+//will scrape all available titles
+router.get('/scrape/', function(req, res){
+
+	var allMovies = 'http://www.imsdb.com/all%20scripts/';
+
+	request(allMovies, function(err, response, html){
+		var $ = cheerio.load(html);
+		$ = cheerio.load($("h1:contains(\"All Movie Scripts\")").parent()[0])
+		var movieTable = $("h1:contains(\"All Movie Scripts\")").parent();
+		var allMovieTitles = $('a[href^="/Movie Scripts"]').map(function(thing){ 
+			return "<option>"+$(this).text()+"</option>"
+		})
+		allMovieTitles = Array.prototype.slice.call(allMovieTitles);
+		console.log("this is the type",typeof allMovieTitles)
+		console.log("much array", Array.isArray(allMovieTitles))
+		// console.log(allMovieTitles)
+		res.send("<select>"+allMovieTitles.join('')+"</select>")
 	})
 })
 
