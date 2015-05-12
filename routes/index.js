@@ -52,20 +52,24 @@ router.get("/api/gender/:name", function(req,res){
 router.get('/scrape/:title', function(req, res){
 
 	var title = req.params.title +' Script';
+	var originalTitle = req.params.title;
 	var allMovies = 'http://www.imsdb.com/all%20scripts/';
 
 	request(allMovies, function(err, response, html){
 		var $ = cheerio.load(html);
 		var stringy = "a[title='"+title+"']"
 		var linkToMovie = $(stringy).attr("href");
-
-		request("http://www.imsdb.com/"+linkToMovie, function(err, response, html){
+		request("http://www.imsdb.com"+linkToMovie, function(err, response, html){
 			if (err) console.log("err in second request", err)
-			// this doesn't work yet
-			// var $ = cheerio.load(html);
-			// var innerHTML2SearchBy = "Read "+title;
-			// var awesomeElement = "a:contains(" + innerHTML2SearchBy+ ")"
-			// console.log("hi there coolio", $(awesomeElement).html());
+			 //this doesn't work yet
+			 var $ = cheerio.load(html);
+			 //var innerHTML2SearchBy = "Read \""+title + "\"";
+				var scriptLinkElement = $('a').map(function(i, e) {
+					console.log('i', i,'e',  $(this).text());
+				if ($(this).text() === "Read \""+originalTitle + "\" Script")
+					return $(this).text();
+			})[0];
+			 console.log("hi there coolio", scriptLinkElement);
 			res.end();
 		})
 	})
