@@ -59,18 +59,21 @@ router.get('/scrape/:title', function(req, res){
 		var $ = cheerio.load(html);
 		var stringy = "a[title='"+title+"']"
 		var linkToMovie = $(stringy).attr("href");
+
 		request("http://www.imsdb.com"+linkToMovie, function(err, response, html){
 			if (err) console.log("err in second request", err)
 			 //this doesn't work yet
 			 var $ = cheerio.load(html);
 			 //var innerHTML2SearchBy = "Read \""+title + "\"";
-				var scriptLinkElement = $('a').map(function(i, e) {
-					console.log('i', i,'e',  $(this).text());
-				if ($(this).text() === "Read \""+originalTitle + "\" Script")
-					return $(this).text();
-			})[0];
-			 console.log("hi there coolio", scriptLinkElement);
-			res.end();
+			 var awesomeElement = "a:contains(Read \"" + originalTitle + "\" Script)"
+			 var scriptLink = $(awesomeElement).attr("href");
+			request("http://www.imsdb.com" + scriptLink, function (err, response, html)  {
+				if (err) console.log('err in third request');
+				var $ = cheerio.load(html);
+				var script = $('body').text();
+				res.send(script);
+			})
+
 		})
 	})
 })
