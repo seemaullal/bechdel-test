@@ -79,7 +79,7 @@ router.get('/scrape/:title', function(req, res){
 	})
 })
 
-//will scrape all available titles
+//will scrape all available titles and return a drop down box
 router.get('/scrape/', function(req, res){
 
 	var allMovies = 'http://www.imsdb.com/all%20scripts/';
