@@ -29,8 +29,9 @@ var linkFinder = function(script, topNames){
   		conversations.push(convo);
     }
 	}
-  $("#ladyConvoCount").text("We *think* there were "+ladyConvoCount+" conversations between women");
-	$("#linesAboutMen").text("We predict that "+linesAboutMen+ " of those conversations were about men");
+  $("#ladyConvoCount").text("We found "+ladyConvoCount+" conversations that had at least one female participant"); 
+  
+	$("#linesAboutMen").text("We think that "+linesAboutMen+ " of those conversations were about men");
   if(ladyConvoCount > 0){
     tests++;
   }
