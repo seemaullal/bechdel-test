@@ -323,6 +323,12 @@ $.getScript("js/commonwords.js", function(){
     $("#splitAnalysis").click(function(event){
       var currTitle = $("#movieTitle").val()
       $.get('/api/scrape/'+currTitle, function(script){
+        if (script === "wrong"){
+          $("#select4Analysis").text("we found a bug sorry")
+          setTimeout(function(){
+            location.reload();
+          }, 3000);
+        }
         console.log("type", typeof script)
         console.log(script)
         analyzer(script);
