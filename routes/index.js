@@ -82,7 +82,7 @@ router.get('/api/scrape/:title', function(req, res){
 			 var awesomeElement = "a:contains(Read \"" + originalTitle + "\" Script)"
 			 var scriptLink = $(awesomeElement).attr("href");
 			request("http://www.imsdb.com" + scriptLink, function (err, response, html)  {
-				if (err) console.log('err in third request');
+				if (err) res.send('/');
 				var $ = cheerio.load(html);
 				var script = $('body').text();
 				res.send(script);
