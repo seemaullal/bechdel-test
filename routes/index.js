@@ -70,19 +70,20 @@ router.get('/api/scrape/:title', function(req, res){
 	var allMovies = 'http://www.imsdb.com/all%20scripts/';
 
 	request(allMovies, function(err, response, html){
+		if (err) res.redirect('/');
 		var $ = cheerio.load(html);
 		var stringy = "a[title='"+title+"']"
 		var linkToMovie = $(stringy).attr("href");
 
 		request("http://www.imsdb.com"+linkToMovie, function(err, response, html){
-			if (err) console.log("err in second request", err)
+			if (err) res.redirect('/');
 			 //this doesn't work yet
 			 var $ = cheerio.load(html);
 			 //var innerHTML2SearchBy = "Read \""+title + "\"";
 			 var awesomeElement = "a:contains(Read \"" + originalTitle + "\" Script)"
 			 var scriptLink = $(awesomeElement).attr("href");
 			request("http://www.imsdb.com" + scriptLink, function (err, response, html)  {
-				if (err) res.send('/');
+				if (err) res.redirect('/');
 				var $ = cheerio.load(html);
 				var script = $('body').text();
 				res.send(script);
