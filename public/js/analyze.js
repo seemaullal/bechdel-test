@@ -330,6 +330,8 @@ $.getScript("js/commonwords.js", function(){
         $("#results").show();
         $("#form").hide();
         $("#splitAnalysis").hide();
+        $("#movieTitle").hide();
+        $("#select4Analysis").hide();
       });
     });
     $("#tomatoesAnalysis").click(function(event){
