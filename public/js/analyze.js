@@ -323,21 +323,22 @@ $.getScript("js/commonwords.js", function(){
     $("#splitAnalysis").click(function(event){
       var currTitle = $("#movieTitle").val()
       $.get('/api/scrape/'+currTitle, function(script){
-        if (script === "wrong"){
+        console.log("script", script)
+        if (script === "wrong" || script === ''){
+          console.log("bugular")
           $("#select4Analysis").text("we found a bug sorry")
           setTimeout(function(){
             location.reload();
           }, 3000);
+        }else{
+          analyzer(script)
+          $("#movieNameDisplay").text($("#movieName").val());
+          $("#results").show();
+          $("#form").hide();
+          $("#splitAnalysis").hide();
+          $("#movieTitle").hide();
+          $("#select4Analysis").hide();
         }
-        console.log("type", typeof script)
-        console.log(script)
-        analyzer(script);
-        $("#movieNameDisplay").text($("#movieName").val());
-        $("#results").show();
-        $("#form").hide();
-        $("#splitAnalysis").hide();
-        $("#movieTitle").hide();
-        $("#select4Analysis").hide();
       });
     });
     $("#tomatoesAnalysis").click(function(event){
