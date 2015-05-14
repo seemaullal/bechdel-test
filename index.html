@@ -51,6 +51,11 @@ stroke-opacity: .6;
 			</p>
 		</div>
 	</div>
+	<select id="movieTitle">
+	{% for title in allMovieTitles %}
+		<option >{{ title }}</option>
+	{% endfor %}
+	</select>
 	<div class="mainPart">
 		<div id="form" class="container">
 			<h1 class="text-center" >Do you know if your favorite movie passes the Bechdel test?</h1>

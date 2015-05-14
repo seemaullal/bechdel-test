@@ -320,11 +320,11 @@ $.getScript("js/commonwords.js", function(){
       $('.mainPart').show();
     });
     $("#splitAnalysis").click(function(event){
-      event.preventDefault();
-      analyzer($("#script").val());
-      $("#movieNameDisplay").text($("#movieName").val());
-      $("#results").show();
-      $("#form").hide();
+      console.log("did we grab the title?", $("#movieTitle").val())
+      // analyzer($("#script").val());
+      // $("#movieNameDisplay").text($("#movieName").val());
+      // $("#results").show();
+      // $("#form").hide();
     });
     $("#tomatoesAnalysis").click(function(event){
       event.preventDefault();
