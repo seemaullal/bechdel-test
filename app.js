@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-
+var swig = require('swig');
 
 var bodyParser = require('body-parser');
 
@@ -12,7 +12,9 @@ var bodyParser = require('body-parser');
 var app = express();
 
 // view engine setup
-
+app.set('views', __dirname);
+app.set('view engine', 'html');
+app.engine('html', swig.renderFile);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));

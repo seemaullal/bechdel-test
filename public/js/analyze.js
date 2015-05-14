@@ -29,8 +29,9 @@ var linkFinder = function(script, topNames){
   		conversations.push(convo);
     }
 	}
-  $("#ladyConvoCount").text("We *think* there were "+ladyConvoCount+" conversations between women");
-	$("#linesAboutMen").text("We predict that "+linesAboutMen+ " of those conversations were about men");
+  $("#ladyConvoCount").text("We found "+ladyConvoCount+" conversations that had at least one female participant"); 
+  
+	$("#linesAboutMen").text("We think that "+linesAboutMen+ " of those conversations were about men");
   if(ladyConvoCount > 0){
     tests++;
   }
@@ -320,11 +321,18 @@ $.getScript("js/commonwords.js", function(){
       $('.mainPart').show();
     });
     $("#splitAnalysis").click(function(event){
-      event.preventDefault();
-      analyzer($("#script").val());
-      $("#movieNameDisplay").text($("#movieName").val());
-      $("#results").show();
-      $("#form").hide();
+      var currTitle = $("#movieTitle").val()
+      $.get('/api/scrape/'+currTitle, function(script){
+        console.log("type", typeof script)
+        console.log(script)
+        analyzer(script);
+        $("#movieNameDisplay").text($("#movieName").val());
+        $("#results").show();
+        $("#form").hide();
+        $("#splitAnalysis").hide();
+        $("#movieTitle").hide();
+        $("#select4Analysis").hide();
+      });
     });
     $("#tomatoesAnalysis").click(function(event){
       event.preventDefault();
