@@ -51,22 +51,15 @@ stroke-opacity: .6;
 			</p>
 		</div>
 	</div>
-	<select id="movieTitle">
-	{% for title in allMovieTitles %}
-		<option >{{ title }}</option>
-	{% endfor %}
-	</select>
 	<div class="mainPart">
-		<div id="form" class="container">
-			<h1 class="text-center" >Do you know if your favorite movie passes the Bechdel test?</h1>
-			<textarea type="text" class="form-control" id="script" rows="10"></textarea>
-			<input type="text" class="form-control" id="movieName" placeholder="Enter movie name if running tomato analysis">
-			<br>
-			<div class='text-center'>
-			<button type="button" class="btn btn-white" id="tomatoesAnalysis">Tomato Analysis</button>
-			<button type="button" class="btn btn-white"id="splitAnalysis">Split Analysis</button>
-		</div>
-		<br>
+		<h1>Please select a movie for analysis...</h1>
+		<select id="movieTitle">
+		{% for title in allMovieTitles %}
+			<option >{{ title }}</option>
+		{% endfor %}
+	</select>
+		<button type="button" class="btn btn-white" id="tomatoesAnalysis">Tomato Analysis</button>
+		<button type="button" class="btn btn-white"id="splitAnalysis">Bechdelerate</button>
 	</div>
 	<div class="text-center container" id="results">
 		<h1 class="panic">Whoops. We maxed out our API from too many movies. But if you check back next week you might have more luck</h1>
