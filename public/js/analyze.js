@@ -328,6 +328,7 @@ $.getScript("js/commonwords.js", function(){
         $("#movieNameDisplay").text($("#movieName").val());
         $("#results").show();
         $("#form").hide();
+        $("#splitAnalysis").hide();
       });
     });
     $("#tomatoesAnalysis").click(function(event){
