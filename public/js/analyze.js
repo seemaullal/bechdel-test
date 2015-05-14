@@ -320,11 +320,15 @@ $.getScript("js/commonwords.js", function(){
       $('.mainPart').show();
     });
     $("#splitAnalysis").click(function(event){
-      console.log("did we grab the title?", $("#movieTitle").val())
-      // analyzer($("#script").val());
-      // $("#movieNameDisplay").text($("#movieName").val());
-      // $("#results").show();
-      // $("#form").hide();
+      var currTitle = $("#movieTitle").val()
+      $.get('/api/scrape/'+currTitle, function(script){
+        console.log("type", typeof script)
+        console.log(script)
+        analyzer(script);
+        $("#movieNameDisplay").text($("#movieName").val());
+        $("#results").show();
+        $("#form").hide();
+      });
     });
     $("#tomatoesAnalysis").click(function(event){
       event.preventDefault();
