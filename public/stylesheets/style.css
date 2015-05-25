@@ -8,7 +8,8 @@
     width:45%;
 }
 body {
-  background: #59B889;
+  /*background: #59B889;*/
+  background-image: url('stardust.png');
 }
 
 h1 {
@@ -36,6 +37,7 @@ color: white;
 }
 #results{
   display: none;
+  color: white;
 }
 #close-about {
   float: right;
@@ -68,7 +70,7 @@ color: white;
   width: 70%;
   margin-top: 10px;
   padding: 10px;
-  background-color: #322F30;
+  background-color: rgba(137, 41, 118, 0.32);
   color: #DAE4DF;
   display: none;
   font-family: 'Roboto', serif;
@@ -98,4 +100,7 @@ a{
 }
 #tomatoesAnalysis{
   display: none;
+}
+#movieTitle{
+  margin: 20px;
 }

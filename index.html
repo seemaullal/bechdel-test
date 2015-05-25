@@ -24,13 +24,12 @@ stroke-opacity: .6;
 }
 </style>
 <body>
-	<div id='what'>
-		About
-	</div>
+	<h4 id='what'>What is this?</h4>
+
 	
 	<div id='instructions'>
 		<div id="close-about"><h4>X</h4></div>
-		<h2 id="title" class="text-center">Bechdelerator</h2>
+		<h2 id="title" class="text-center">The Bechdelerator</h2>
 		<div id="about">
 			<p>
 			The Bechdel Test was created by writer <a target="_blank" href="http://en.wikipedia.org/wiki/Alison_Bechdel">Alison Bechdel</a> in the comic strip "Dykes To Watch Out For". A movie passes the test if it:
@@ -44,10 +43,10 @@ stroke-opacity: .6;
 			The Bechdelerator predicts whether movies pass the Bechdel test by analyzing their scripts, identifying conversations between characters, and determining whether those conversations pass the requirements of the test. It also provides a graph of the conversations between different characters where node size represents the number of conversations a character has, node color shows gender of the character (blue for men and pink for women), and links represent if two character conversed in the movie.
 			</p>
 			<p>
-			To see if your favorite movie passes the test, simply scroll through our dynamicly generated list of movie scripts from <a target="_blank" href="http://www.imsdb.com/all%20scripts/"> IMSDB </a>.
+			To see if your favorite movie passes the test, simply scroll through our dynamicly generated list of movie scripts from <a target="_blank" href="http://www.imsdb.com/all%20scripts/"> IMSDB </a> and click the Bechdelerate button.
 			</p>
 			<p>
-			The Bechdelerator was created by <a href="http://munzicodes.com/">Sarah</a> and <a href="http://seemaisms.tumblr.com">Seema</a>.
+			The Bechdelerator was created by <a target="_blank" href="http://munzicodes.com/">Sarah</a> and <a target="_blank" href="http://seemaisms.tumblr.com">Seema</a>.
 			</p>
 		</div>
 	</div>
@@ -57,14 +56,14 @@ stroke-opacity: .6;
 		{% for title in allMovieTitles %}
 			<option >{{ title }}</option>
 		{% endfor %}
-	</select>
+		</select>
 		<button type="button" class="btn btn-white" id="tomatoesAnalysis">Tomato Analysis</button>
 		<button type="button" class="btn btn-white" id="splitAnalysis">Bechdelerate</button>
 		<button type="button" class="btn btn-white" id="tryAgain">Try Another Script</button>
 	</div>
 	<div class="text-center container" id="results">
 		<h1 class="panic">Whoops. We maxed out our API from too many movies. But if you check back next week you might have more luck</h1>
-		<img id="loading" src="http://sierrafire.cr.usgs.gov/images/loading.gif" />
+		<img id="loading" src="loader.gif" />
 		<div id="visualization"></div>
 		<h1 id="movieNameDisplay"></h1>
 		<h3 id="womanCount"></h3>
