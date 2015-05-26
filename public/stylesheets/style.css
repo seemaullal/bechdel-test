@@ -9,7 +9,9 @@
 }
 body {
   /*background: #59B889;*/
-  background-image: url('stardust.png');
+  background-image: url('background.jpg');
+  background-attachment: fixed;
+  background-position: center; 
 }
 
 h1 {
