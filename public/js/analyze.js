@@ -4,26 +4,26 @@ var linkFinder = function(script, topNames){
   //
   var ladyConvoCount = 0;
   var linesAboutMen = 0;
-	var nameCatcher = /\s[A-Z]+\s/g;
-	var names = script.match(nameCatcher);
+	var nameCatcher = /\s[A-Z]+\s/g; //potential names are in all capital letters
+	var names = script.match(nameCatcher); //get all potential names from the script
 	names = names.filter(function(word){
-		word = word.replace(/(\r\n|\n|\r)/gm,"").trim();
-		return word.length > 1;
+		word = word.replace(/(\r\n|\n|\r)/gm,"").trim(); //remove new lines and such from the potential names
+		return word.length > 1; //remove words that are either 0 or 1 letters long
 	});
 	
-	var lines = script.split(nameCatcher);
+	var lines = script.split(nameCatcher); //'lines' are found between two names 
 	var conversations = [];
 	for(var nameIndex = 0; nameIndex < (names.length); nameIndex++){
 		var convo = {};
 		convo.personA = names[nameIndex];
 		convo.personB = names[nameIndex+1];
-    convo.line = lines[nameIndex];
+    convo.line = lines[nameIndex]; //a conversation contains 2 characters and the line they say to one another
     if (convo.personA && convo.personB) {
       if(womenNames.indexOf(convo.personA.trim()) > -1 && womenNames.indexOf(convo.personB.trim()) > -1){
-        ladyConvoCount++;
+        ladyConvoCount++; //check if both of the characters are women
 
         if(convo.line.match(/he|him|his/)){
-          linesAboutMen++;
+          linesAboutMen++; //if the conversation is between women, check if it is about a man
         }
       }
   		conversations.push(convo);
@@ -31,21 +31,15 @@ var linkFinder = function(script, topNames){
 	}
   $("#ladyConvoCount").text("We found "+ladyConvoCount+" conversations that had at least one female participant"); 
   
-	$("#linesAboutMen").text("We think that "+linesAboutMen+ " of those conversations were about men");
+	$("#linesAboutMen").text("We think that " + linesAboutMen + " of those conversations were about men");
   if(ladyConvoCount > 0){
     tests++;
   }
   if(ladyConvoCount > linesAboutMen){
     tests++;
   }
-  console.log("names",names);
-	console.log("lines",lines);
-	console.log("conversations",conversations);
 	links = [];
-  
-  console.log("topNames", topNames);
 	conversations.forEach(function(convo){
-
 		var source = topNames.indexOf(convo.personA);
 		var target = topNames.indexOf(convo.personB);
 		if (source > -1 && target > -1){
@@ -128,7 +122,7 @@ var analyzer = function(script){
     console.log('nodes',nodes);
     console.log('links',links);
     noder(nodes, links);
-    $("#womanCount").text("There are "+genderCount+" major characters with womanly names: "+womenNames);
+    $("#womanCount").text("There are " + genderCount + " major characters with womanly names: "+womenNames);
     if(womenNames.length >=2){
       tests++;
     }
@@ -279,7 +273,7 @@ function tomatoesAreFruit(movieName) {
       if(womenNames.length >=2){
         tests++;
       }
-      $("#womanCount").text("There are "+genderCount+" major characters with womanly names: " + womenNames.join(", "));
+      $("#womanCount").text("There are " + genderCount + " major characters with womanly names: " + womenNames.join(", "));
       console.log('ladyconvos',ladyConvoCount);
       $("#ladyConvoCount").text("We *think* there were "+ladyConvoCount+" conversations between women");
       $("#linesAboutMen").text("We predict that "+linesAboutMen+ " of those conversations were about men");
@@ -321,17 +315,17 @@ $.getScript("js/commonwords.js", function(){
       $('.mainPart').show();
     });
     $("#splitAnalysis").click(function(event){
-      var currTitle = $("#movieTitle").val()
+      var currTitle = $("#movieTitle").val();
       $.get('/api/scrape/'+currTitle, function(script){
-        console.log("script", script)
+        console.log("script", script);
         if (script === "wrong" || script === ''){
-          console.log("bugular")
-          $("#select4Analysis").text("we found a bug sorry")
+          console.log("bugular");
+          $("#select4Analysis").text("we found a bug sorry");
           setTimeout(function(){
             location.reload();
           }, 3000);
         }else{
-          analyzer(script)
+          analyzer(script);
           $("#movieNameDisplay").text($("#movieName").val());
           $("#results").show();
           $("#form").hide();

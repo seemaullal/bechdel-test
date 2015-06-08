@@ -23,6 +23,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/api/getcast/:moviename', function(req,res) {
 	var url = 'http://api.rottentomatoes.com/api/public/v1.0/movies.json';
+	// url + ? + 'apikey=' + 	apiKey 
 	var qs = {
 		apikey : 'tg7n4r3efe9dezvrpk3t6j7m',
 		q : req.params.moviename,
