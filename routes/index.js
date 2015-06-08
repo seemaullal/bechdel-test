@@ -83,7 +83,7 @@ router.get('/api/scrape/:title', function(req, res){
 				console.log("error", err)
 				res.send("wrong");
 			}
-			 //this doesn't work yet?
+			 //this doesn't work yet...
 			 var $ = cheerio.load(html);
 			 //var innerHTML2SearchBy = "Read \""+title + "\"";
 			 var awesomeElement = "a:contains(Read \"" + originalTitle + "\" Script)"
