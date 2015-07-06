@@ -15,8 +15,6 @@ router.get('/', function(req, res, next) {
 			return $(this).text()
 		})
 		allMovieTitles = Array.prototype.slice.call(allMovieTitles);
-		// console.log(allMovieTitles)
-		// res.sendFile({root: './'});
 		res.render('./index.html', {allMovieTitles: allMovieTitles});
 	})
 });
@@ -43,8 +41,6 @@ router.get('/api/getcast/:moviename', function(req,res) {
 				res.send(characters);
 			});
 
-			// console.log(body);
-			// res.send(body);
 		}
 	});
 
@@ -84,7 +80,7 @@ router.get('/api/scrape/:title', function(req, res){
 				console.log("error", err)
 				res.send("wrong");
 			}
-			 //this doesn't work yet
+			 
 			 var $ = cheerio.load(html);
 			 //var innerHTML2SearchBy = "Read \""+title + "\"";
 			 var awesomeElement = "a:contains(Read \"" + originalTitle + "\" Script)"
