@@ -23,12 +23,9 @@ See a live version of the app [here](http://bechdelerator.herokuapp.com/).
 ## Instructions
 
 To see if your favorite movie passes the Bechdel Test:
- 1. Copy your favorite movie script
- 2. Paste it into the Bechdelerator
- 3. Type in the title of the movie
- 4. Click Tomato Analysis or Split Analysis to see the Bechdelerator's Analysis.
-Tomato Analysis uses Rotten Tomatoes' API to identify major characters, while Split Analysis attempts to identify them through the Bechderator algorithm.
- 5. The D3 focal graph created reflects communication between characters. Pink nodes are female, blue nodes are male, the lines connecting them are lines shared between them. To identify a particular character, hover over a node.
+ 1.  Select the movie from the drop down list
+ 2. Click Bechdelerate to see the Bechdelerator's Analysis.
+ 3. The D3 focal graph created reflects communication between characters. Pink nodes are female, blue nodes are male, the lines connecting them are lines shared between them. To identify a particular character, hover over a node.
 
 
 ### Roadmap
