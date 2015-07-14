@@ -6,7 +6,7 @@
 - [Screenshot](#screenshot)
 - [Instructions](#instructions)
 - [Features] (#features)
-- [Next Steps] (#next_steps)
+- [Next Steps] (#talks)
 - [Talks] (#talks)
 - [Contributors](#contributors)
 - [License](#license)
