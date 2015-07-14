@@ -30,10 +30,10 @@ To see if your favorite movie passes the Bechdel Test:
 
 ## Features
 - Scrapes movie script data from <a href="http://www.imsdb.com/>IMSDB</a> using the Cheerio and Request libraries
--	Identifies main characters through our Bechdelerator Algorithm and through the Rotten Tomatoes API
--	Makes predictions about the genders of main characters with the Genderize API
--	Predicts if a given movie passes the Bechdel Test
--	Generates a D3 focal graph reflecting character communication
+- Identifies main characters through our Bechdelerator Algorithm and through the Rotten Tomatoes API
+- Makes predictions about the genders of main characters with the Genderize API
+- Predicts if a given movie passes the Bechdel Test
+- Generates a D3 focal graph reflecting character communication
 
 <h2 id="next-steps>Next Steps</h2>
 - Improve user interface
