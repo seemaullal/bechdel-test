@@ -1,13 +1,14 @@
-# Bechderator
+##Bechderator
 ##### Visualize movie scripts and predict if movies pass the Bechdel test
 =============
 ![Badge of Honor](https://img.shields.io/badge/Built%20at-Fullstack-green.svg?style=flat-square)
+
 ## Table of Contents
 - [Screenshot](#screenshot)
 - [Instructions](#instructions)
-- [Features] (#features)
-- [Next Steps] (#talks)
-- [Talks] (#talks)
+- [Features](#features)
+- [Next Steps](#talks)
+- [Talks](#talks)
 - [Contributors](#contributors)
 - [License](#license)
 
@@ -32,6 +33,18 @@ To see if your favorite movie passes the Bechdel Test:
 - Predicts if a given movie passes the Bechdel Test
 - Generates a D3 focal graph reflecting character communication
 
+## Next Steps
+- Improve user interface
+- Store results in a database rather than regenerate results each time
+- Add ability to analyze results
+
+## Talks
+- "Building the Bechdelerator" (<a href="http://slides.com/seemaullal/bechdelerator-7">Slides</a>)
+    &nbsp;*QueensJS,* July 2015 
+- "The Bechdelerator" (<a href="http://slides.com/seemaullal/bechdelerator">Slides</a>)
+&nbsp;*Women Who Code*, June 2015 
+
+
 ## Contributors
 * __Seema Ullal__ - [LinkedIn](https://www.linkedin.com/profile/in/seemaullal) | [GitHub](https://github.com/seemaulla)
 * __Sarah Muenzinger__ - [LinkedIn](https://www.linkedin.com/profile/in/sarahmuenzinger) | [GitHub](https://github.com/smuenzinger)
@@ -39,6 +52,3 @@ To see if your favorite movie passes the Bechdel Test:
 ## License
 
 This project is licensed under the terms of the [MIT license](http://opensource.org/licenses/MIT)
-
-
-
