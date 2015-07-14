@@ -39,8 +39,8 @@ To see if your favorite movie passes the Bechdel Test:
 - Add ability to analyze results
 
 ## Talks
-- "Building the Bechdelerator" (<a href="http://slides.com/seemaullal/bechdelerator-7">Slides</a>)
-    &nbsp;*QueensJS,* July 2015 
+- "Building the Bechdelerator" ( <a href="http://slides.com/seemaullal/bechdelerator-7">Slides</a> )
+  &nbsp;*QueensJS,* July 2015 
 - "The Bechdelerator" (<a href="http://slides.com/seemaullal/bechdelerator">Slides</a>)
 &nbsp;*Women Who Code*, June 2015 
 
