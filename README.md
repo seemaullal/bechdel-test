@@ -32,15 +32,6 @@ To see if your favorite movie passes the Bechdel Test:
 - Predicts if a given movie passes the Bechdel Test
 - Generates a D3 focal graph reflecting character communication
 
-## Next Steps
-- Improve user interface
-- Store results in a database rather than regenerate results each time
-- Add ability to analyze results
-
-## Talks
-- "Building the Bechdelerator", QueensJS, July 2015 (<a href="http://slides.com/seemaullal/bechdelerator-7">Slides</a>)
-- "The Bechdelerator", Women Who Code, June 2015 (<a href="http://slides.com/seemaullal/bechdelerator">Slides</a>)
-
 ## Contributors
 * __Seema Ullal__ - [LinkedIn](https://www.linkedin.com/profile/in/seemaullal) | [GitHub](https://github.com/seemaulla)
 * __Sarah Muenzinger__ - [LinkedIn](https://www.linkedin.com/profile/in/sarahmuenzinger) | [GitHub](https://github.com/smuenzinger)
