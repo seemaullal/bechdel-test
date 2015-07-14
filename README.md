@@ -1,12 +1,12 @@
 # Bechderator
-#### Visualize movie scripts and predict if movies pass the Bechdel test
+##### Visualize movie scripts and predict if movies pass the Bechdel test
 =============
 ![Badge of Honor](https://img.shields.io/badge/Built%20at-Fullstack-green.svg?style=flat-square)
 ## Table of Contents
 - [Screenshot](#screenshot)
 - [Instructions](#instructions)
 - [Features] (#features)
-- [Next Steps] (#next-steps)
+- [Next Steps] (#next_steps)
 - [Talks] (#talks)
 - [Contributors](#contributors)
 - [License](#license)
@@ -35,7 +35,7 @@ To see if your favorite movie passes the Bechdel Test:
 - Predicts if a given movie passes the Bechdel Test
 - Generates a D3 focal graph reflecting character communication
 
-<h2 id="next-steps>Next Steps</h2>
+## Next Steps
 - Improve user interface
 - Store results in a database rather than regenerate results each time
 - Add ability to analyze results
