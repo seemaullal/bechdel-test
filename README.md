@@ -26,12 +26,14 @@ To see if your favorite movie passes the Bechdel Test:
  2. Click Bechdelerate to see the Bechdelerator's Analysis.
  3. The D3 focal graph created reflects communication between characters. Pink nodes are female, blue nodes are male, the lines connecting them are lines shared between them. To identify a particular character, hover over a node.
 
+
 ## Features
 - Scrapes movie script data from <a href="http://www.imsdb.com/>IMSDB</a> using the Cheerio and Request libraries
 - Identifies main characters through our Bechdelerator Algorithm and through the Rotten Tomatoes API
 - Makes predictions about the genders of main characters with the Genderize API
 - Predicts if a given movie passes the Bechdel Test
 - Generates a D3 focal graph reflecting character communication
+
 
 ## Next Steps
 - Improve user interface
