@@ -1,8 +1,7 @@
 # Bechderator
+#### Visualize movie scripts and predict if movies pass the Bechdel test
 =============
 ![Badge of Honor](https://img.shields.io/badge/Built%20at-Fullstack-green.svg?style=flat-square)
-> Visualize movie scripts and the Bechdel test
-
 ## Table of Contents
 - [Screenshot](#screenshot)
 - [Instructions](#instructions)
