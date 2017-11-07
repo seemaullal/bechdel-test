@@ -11,7 +11,7 @@ body {
   /*background: #59B889;*/
   background-image: url('background.jpg');
   background-attachment: fixed;
-  background-position: center; 
+  background-position: center;
 }
 
 h1 {
@@ -87,7 +87,7 @@ color: white;
 #tryAgain{
   display:none;
   z-index: 10;
-  
+
 }
 
 svg {
@@ -99,6 +99,9 @@ svg {
 }
 a{
   color:#59B889;
+}
+a:hover {
+  color:#b86559;
 }
 #tomatoesAnalysis{
   display: none;
